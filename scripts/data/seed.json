@@ -1,0 +1,95 @@
+{
+  "slug": "sasti-adam",
+  "hero": {
+    "heading": "The Wedding of",
+    "names": "Sasti & Adam",
+    "date": "17.07.26",
+    "image": "/assets/two.jpeg",
+    "quote": {
+      "arabic": "وَمِن كُلِّ شَيْءٍ خَلَقْنَا زَوْجَيْنِ لَعَلَّكُمْ تَذَكَّرُونَ",
+      "translation": "Dan segala sesuatu Kami ciptakan berpasang-pasangan agar kamu mengingat (kebesaran Allah).",
+      "source": "QS. Az-Zariyat: 49"
+    }
+  },
+  "mempelai": {
+    "pria": {
+      "namaLengkap": "Ibnu Adam",
+      "putraDari": "Bpk. M & Ibu S",
+      "fotoUrl": "/assets/groom.jpeg"
+    },
+    "wanita": {
+      "namaLengkap": "Sasti Virgine Javanti",
+      "putriDari": "Bpk. S & Ibu N",
+      "fotoUrl": "/assets/bride.jpeg"
+    }
+  },
+  "acara": [
+    {
+      "title": "Akad Nikah",
+      "tanggal": "2026-07-17T09:00:00.000Z",
+      "jam": "09:00 WIB",
+      "tempat": "Rumah Mempelai Wanita",
+      "maps": "https://maps.google.com/?q=Masjid+Al-Ikhlas",
+      "enabled": true
+    },
+    {
+      "title": "Resepsi",
+      "tanggal": "2026-07-17T11:00:00.000Z",
+      "jam": "11:00 - 13:00 WIB",
+      "tempat": "Rumah Mempelai Wanita",
+      "maps": "https://maps.google.com/?q=Hotel+Indonesia",
+      "enabled": true
+    }
+  ],
+  "weddingStory": [
+  {
+    "year": "2021",
+    "title": "First Meeting",
+    "content": "Atas izin Allah, kami dipertemukan untuk pertama kalinya sebagai bagian dari organisasi GENBI. Sebuah pertemuan sederhana yang menjadi awal dari rencana-Nya yang indah.",
+    "enabled": true
+  },
+  {
+    "year": "2021",
+    "title": "Menjalin Hubungan",
+    "content": "Dengan niat yang baik dan saling menjaga, kami memilih untuk saling mengenal lebih dalam, belajar tentang sabar, doa, dan komitmen.",
+    "enabled": true
+  },
+  {
+    "year": "2024",
+    "title": "Engagement",
+    "content": "Dengan memohon ridha Allah dan restu orang tua, kami mengikat janji dalam pertunangan sebagai langkah awal menuju pernikahan yang diridhai-Nya.",
+    "enabled": true
+  }
+  ],
+  "paymentMethods": [
+    {
+      "bank": "BCA",
+      "number": "4561042386",
+      "holder": "Ibnu Adam",
+      "type": "bank",
+      "enabled": true
+    },
+    {
+      "bank": "Mandiri",
+      "number": "1370020120313",
+      "holder": "Ibnu Adam",
+      "type": "bank",
+      "enabled": true
+    },
+    {
+      "name": "Rumah Mempelai Wanita",
+      "address": "Jl. Mempelai Wanita",
+      "type": "address",
+      "enabled": true
+    }
+  ],
+  "comments": [
+    {
+      "name": "Admin",
+      "message": "Welcome to our wedding website!",
+      "timestamp": "2024-12-01T10:00:00.000Z",
+      "isVisible": true,
+      "isFavorite": true
+    }
+  ]
+}
