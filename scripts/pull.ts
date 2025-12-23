@@ -5,22 +5,21 @@ import dbConnect from "../lib/mongodb";
 import Invitation from "../models/Invitation";
 
 async function pull() {
+  const slug = process.argv[2] || "main";
+
   try {
     await dbConnect();
-    console.log("Connected to MongoDB");
+    console.log(`Connected to MongoDB. Fetching slug: ${slug}`);
 
-    // Default slug, or make it configurable
-    const SLUG = "sasti-adam"; 
-
-    const invitation = await Invitation.findOne({ slug: SLUG }).lean();
+    const invitation = await Invitation.findOne({ slug }).lean();
 
     if (!invitation) {
-      console.error(`Invitation with slug '${SLUG}' not found.`);
+      console.error(`Invitation with slug '${slug}' not found.`);
       process.exit(1);
     }
 
-    // Clean up Mongoose specific fields
-    const { _id, __v, createdAt, updatedAt, ...cleanData } = invitation as any;
+    // Remove DB specific fields and the slug itself from the export
+    const { _id, __v, createdAt, updatedAt, slug: _, ...cleanData } = invitation as any;
 
     // Remove _id from subdocuments if any (Mongoose .lean() still keeps them sometimes or if arrays)
     // A simple JSON parse/stringify replay can help if we want to be sure, 

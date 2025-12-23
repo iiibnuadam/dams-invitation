@@ -22,14 +22,13 @@ async function seed() {
     const fileContent = await fs.readFile(filePath, "utf-8");
     const seedData = JSON.parse(fileContent);
 
-    if (!seedData.slug) {
-        throw new Error("Seed data must contain a slug");
-    }
+    // Force default slug
+    const finalData = { ...seedData, slug: "main" };
 
-    await Invitation.deleteMany({ slug: seedData.slug });
-    console.log(`Deleted existing invitation for slug: ${seedData.slug}`);
+    await Invitation.deleteMany({ slug: "main" });
+    console.log(`Deleted existing invitation for slug: main`);
 
-    await Invitation.create(seedData);
+    await Invitation.create(finalData);
     console.log("Seeding successful from JSON file");
 
     process.exit(0);

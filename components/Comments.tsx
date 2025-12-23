@@ -15,7 +15,6 @@ interface Comment {
 
 interface CommentsProps {
   data: {
-    slug: string;
     comments: Comment[];
   };
 }
@@ -75,7 +74,6 @@ export default function Comments({ data }: CommentsProps) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          slug: data.slug,
           name: newComment.name,
           message: newComment.message,
           isVisible: newComment.isVisible,

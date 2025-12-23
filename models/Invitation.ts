@@ -55,6 +55,7 @@ export interface IInvitation extends Document {
     isVisible: boolean;
     isFavorite: boolean;
   }[];
+  gallery: string[];
 }
 
 const InvitationSchema: Schema = new Schema(
@@ -121,6 +122,7 @@ const InvitationSchema: Schema = new Schema(
         isFavorite: { type: Boolean, default: false },
       },
     ],
+    gallery: [String],
   },
   { timestamps: true }
 );

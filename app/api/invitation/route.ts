@@ -3,15 +3,8 @@ import dbConnect from "@/lib/mongodb";
 import Invitation from "@/models/Invitation";
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const slug = searchParams.get("slug");
-
-  if (!slug) {
-    return NextResponse.json(
-      { error: "Slug is required" },
-      { status: 400 }
-    );
-  }
+  // Single mode: always fetch "main"
+  const slug = "main";
 
   try {
     await dbConnect();
@@ -39,11 +32,10 @@ export async function PUT(request: Request) {
     await dbConnect();
     const data = await request.json();
     
-    const { slug, ...updateData } = data;
-
-    if (!slug) {
-        return NextResponse.json({ error: "Slug is required" }, { status: 400 });
-    }
+    // Single mode: always update "main"
+    // We strip slug from input if present, though it doesn't matter as we query by "main"
+    const { slug: _ignore, ...updateData } = data;
+    const slug = "main";
 
     const invitation = await Invitation.findOneAndUpdate(
       { slug },

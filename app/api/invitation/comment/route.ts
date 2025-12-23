@@ -4,15 +4,16 @@ import Invitation from "@/models/Invitation";
 
 export async function POST(request: Request) {
   try {
-    const { slug, name, message } = await request.json();
+    const { name, message } = await request.json();
 
-    if (!slug || !name || !message) {
+    if (!name || !message) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
       );
     }
 
+    const slug = "main";
     const normalizedName = name.trim();
     const normalizedMessage = message.trim();
 

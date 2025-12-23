@@ -7,7 +7,7 @@ import Countdown from "@/components/Countdown";
 import Couple from "@/components/Couple";
 import Events from "@/components/Events";
 import Story from "@/components/Story";
-import Gallery from "@/components/Gallery";
+import GallerySection from "@/components/GallerySection";
 import Gift from "@/components/Gift";
 import Comments from "@/components/Comments";
 import Footer from "@/components/Footer";
@@ -19,9 +19,8 @@ export default function Home() {
   const [isOpened, setIsOpened] = useState(false);
 
   useEffect(() => {
-    // Fetch seed data by default slug "sasti-adam"
-    // In production, slug could come from subdomain or path
-    fetch("/api/invitation?slug=sasti-adam")
+    // Fetch default main invitation
+    fetch("/api/invitation")
       .then((res) => res.json())
       .then((d) => {
         setData(d);
@@ -65,8 +64,12 @@ export default function Home() {
         <Couple data={data} />
         <Events data={data} />
         <Story data={data} />
-        <Gallery />
-        <Gift data={data} />
+      {/* Gallery */}
+      {data.gallery && data.gallery.length > 0 && (
+        <GallerySection images={data.gallery} />
+      )}
+      
+      <Gift data={data} />
         <Comments data={data} />
         <Footer />
         <MusicPlayer autoPlayTrigger={isOpened} />
