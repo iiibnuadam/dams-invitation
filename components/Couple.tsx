@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
+import OrbitingCircles from "./OrbitingCircles";
 
 interface CoupleProps {
   data: {
@@ -46,19 +47,31 @@ export default function Couple({ data }: CoupleProps) {
                 viewport={{ once: true }}
                 className="flex flex-col items-center text-center space-y-6"
             >
-                <div className="relative w-64 h-80 rounded-full overflow-hidden border border-border shadow-xl">
-                    {data.mempelai.wanita.fotoUrl ? (
-                         <img 
-                            src={data.mempelai.wanita.fotoUrl} 
-                            alt={data.mempelai.wanita.namaLengkap} 
-                            className="w-full h-full object-cover"
-                         />
-                    ) : (
-                        <div className="absolute inset-0 bg-muted flex items-center justify-center text-muted-foreground italic">
-                             {/* Placeholder */}
-                             Bride Photo
-                        </div>
-                    )}
+                <div className="relative w-64 h-80 flex items-center justify-center">
+                    {/* Orbiting Circles Foreground */}
+                    <div className="absolute inset-0 z-20 pointer-events-none">
+                         <OrbitingCircles radius={190} duration={20} delay={0}>
+                            <Icon icon="ph:heart-fill" className="text-3xl text-rose-400" />
+                         </OrbitingCircles>
+                         <OrbitingCircles radius={190} duration={20} delay={10} reverse>
+                            <Icon icon="ph:heart-duotone" className="text-2xl text-pink-300" />
+                         </OrbitingCircles>
+                    </div>
+
+                    <div className="relative z-10 w-64 h-80 rounded-full overflow-hidden border border-border shadow-xl bg-background">
+                        {data.mempelai.wanita.fotoUrl ? (
+                             <img 
+                                src={data.mempelai.wanita.fotoUrl} 
+                                alt={data.mempelai.wanita.namaLengkap} 
+                                className="w-full h-full object-cover"
+                             />
+                        ) : (
+                            <div className="absolute inset-0 bg-muted flex items-center justify-center text-muted-foreground italic">
+                                 {/* Placeholder */}
+                                 Bride Photo
+                            </div>
+                        )}
+                    </div>
                 </div>
                 <div className="space-y-2">
                     <h3 className="font-heading text-3xl md:text-4xl">{data.mempelai.wanita.namaLengkap}</h3>
@@ -81,18 +94,30 @@ export default function Couple({ data }: CoupleProps) {
                 viewport={{ once: true }}
                 className="flex flex-col items-center text-center space-y-6 md:mt-24" // Offset for layout interest
             >
-                <div className="relative w-64 h-80 rounded-full overflow-hidden border border-border shadow-xl">
-                    {data.mempelai.pria.fotoUrl ? (
-                         <img 
-                            src={data.mempelai.pria.fotoUrl} 
-                            alt={data.mempelai.pria.namaLengkap} 
-                            className="w-full h-full object-cover"
-                         />
-                    ) : (
-                        <div className="absolute inset-0 bg-muted flex items-center justify-center text-muted-foreground italic">
-                            Groom Photo
-                        </div>
-                    )}
+                <div className="relative w-64 h-80 flex items-center justify-center">
+                    {/* Orbiting Circles Foreground */}
+                    <div className="absolute inset-0 z-20 pointer-events-none">
+                         <OrbitingCircles radius={190} duration={25} delay={5}>
+                            <Icon icon="ph:heart-fill" className="text-3xl text-blue-400" />
+                         </OrbitingCircles>
+                         <OrbitingCircles radius={190} duration={25} delay={15} reverse>
+                            <Icon icon="ph:heart-duotone" className="text-2xl text-sky-300" />
+                         </OrbitingCircles>
+                    </div>
+
+                    <div className="relative z-10 w-64 h-80 rounded-full overflow-hidden border border-border shadow-xl bg-background">
+                        {data.mempelai.pria.fotoUrl ? (
+                             <img 
+                                src={data.mempelai.pria.fotoUrl} 
+                                alt={data.mempelai.pria.namaLengkap} 
+                                className="w-full h-full object-cover"
+                             />
+                        ) : (
+                            <div className="absolute inset-0 bg-muted flex items-center justify-center text-muted-foreground italic">
+                                Groom Photo
+                            </div>
+                        )}
+                    </div>
                 </div>
                 <div className="space-y-2">
                     <h3 className="font-heading text-3xl md:text-4xl">{data.mempelai.pria.namaLengkap}</h3>

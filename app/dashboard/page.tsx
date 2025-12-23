@@ -19,6 +19,7 @@ import StoryForm from "./components/StoryForm";
 import GiftForm from "./components/GiftForm";
 import CommentsForm from "./components/CommentsForm";
 import GalleryForm from "./components/GalleryForm";
+import MediaManagerForm from "./components/MediaManagerForm";
 
 // Schema (Kept same as before)
 const invitationSchema = z.object({
@@ -33,6 +34,10 @@ const invitationSchema = z.object({
         source: z.string()
     })
   }),
+  overlay: z.object({
+    backgroundImage: z.string().optional(),
+    coupleImage: z.string().optional()
+  }).optional(),
   mempelai: z.object({
       pria: z.object({
           namaLengkap: z.string(),
@@ -65,7 +70,8 @@ const invitationSchema = z.object({
       holder: z.string().optional(),
       name: z.string().optional(),
       address: z.string().optional(),
-      type: z.enum(["bank", "address"]),
+      image: z.string().optional(),
+      type: z.enum(["bank", "address", "qris"]),
       enabled: z.boolean().default(true)
   })).optional(),
   comments: z.array(z.object({
@@ -75,7 +81,8 @@ const invitationSchema = z.object({
       isVisible: z.boolean().default(true),
       isFavorite: z.boolean().default(false)
   })).optional(),
-  gallery: z.array(z.string()).optional()
+  gallery: z.array(z.string()).optional(),
+  mediaLibrary: z.array(z.string()).optional()
 });
 
 type InvitationFormValues = z.infer<typeof invitationSchema>;
@@ -86,7 +93,8 @@ const MENU_ITEMS = [
   { id: "events", label: "Wedding Events", icon: Calendar },
   { id: "story", label: "Love Story", icon: BookOpen },
   { id: "gift", label: "Gifts & Bank", icon: Gift },
-  { id: "gallery", label: "Gallery", icon: ImageIcon },
+  { id: "gallery", label: "Gallery Section", icon: ImageIcon },
+  { id: "media", label: "Media Manager", icon: ImageIcon },
   { id: "comments", label: "Comments", icon: MessageSquare },
   { id: "json", label: "Raw JSON", icon: Code },
 ];
@@ -112,6 +120,10 @@ export default function DashboardPage() {
       const res = await fetch("/api/invitation"); 
       const data = await res.json();
       if (data && !data.error) {
+           // Migration: If mediaLibrary is empty but gallery has items, copy them
+           if ((!data.mediaLibrary || data.mediaLibrary.length === 0) && data.gallery && data.gallery.length > 0) {
+              data.mediaLibrary = [...data.gallery];
+           }
            reset(data);
            toast.success("Data refreshed");
       }
@@ -130,6 +142,10 @@ export default function DashboardPage() {
             const res = await fetch("/api/invitation"); 
             const data = await res.json();
             if (data && !data.error) {
+                 // Migration: If mediaLibrary is empty but gallery has items, copy them
+                 if ((!data.mediaLibrary || data.mediaLibrary.length === 0) && data.gallery && data.gallery.length > 0) {
+                    data.mediaLibrary = [...data.gallery];
+                 }
                  reset(data);
             }
         } catch (error) {
@@ -276,6 +292,7 @@ export default function DashboardPage() {
                         {activeSection === "story" && <StoryForm />}
                         {activeSection === "gift" && <GiftForm />}
                         {activeSection === "gallery" && <GalleryForm />}
+                        {activeSection === "media" && <MediaManagerForm />}
                         {activeSection === "comments" && <CommentsForm onRefresh={fetchData} />}
                         
                         {activeSection === "json" && (

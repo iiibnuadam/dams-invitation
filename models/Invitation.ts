@@ -13,6 +13,10 @@ export interface IInvitation extends Document {
       source: string;
     };
   };
+  overlay: {
+    backgroundImage?: string;
+    coupleImage?: string;
+  };
   mempelai: {
     pria: {
       namaLengkap: string;
@@ -45,7 +49,8 @@ export interface IInvitation extends Document {
     holder?: string;
     name?: string;
     address?: string;
-    type: "bank" | "address";
+    image?: string; // For QRIS
+    type: "bank" | "address" | "qris";
     enabled: boolean;
   }[];
   comments: {
@@ -56,6 +61,7 @@ export interface IInvitation extends Document {
     isFavorite: boolean;
   }[];
   gallery: string[];
+  mediaLibrary: string[];
 }
 
 const InvitationSchema: Schema = new Schema(
@@ -71,6 +77,10 @@ const InvitationSchema: Schema = new Schema(
         translation: String,
         source: String,
       },
+    },
+    overlay: {
+      backgroundImage: { type: String },
+      coupleImage: { type: String },
     },
     mempelai: {
       pria: {
@@ -109,7 +119,8 @@ const InvitationSchema: Schema = new Schema(
         holder: String,
         name: String,
         address: String,
-        type: { type: String, enum: ["bank", "address"], required: true },
+        image: String,
+        type: { type: String, enum: ["bank", "address", "qris"], required: true },
         enabled: { type: Boolean, default: true },
       },
     ],
@@ -123,6 +134,7 @@ const InvitationSchema: Schema = new Schema(
       },
     ],
     gallery: [String],
+    mediaLibrary: [String],
   },
   { timestamps: true }
 );

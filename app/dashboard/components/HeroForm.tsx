@@ -11,6 +11,7 @@ export default function HeroForm() {
   const { register } = useFormContext();
 
   return (
+    <>
     <Card>
       <CardHeader>
         <CardTitle>Hero Details</CardTitle>
@@ -42,5 +43,17 @@ export default function HeroForm() {
         </div>
       </CardContent>
     </Card>
+
+    <Card>
+      <CardHeader>
+        <CardTitle>Opening Screen (Overlay)</CardTitle>
+        <CardDescription>Customize the first screen guests see.</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <ImageUploadInput name="overlay.backgroundImage" label="Overlay Background" />
+        <ImageUploadInput name="overlay.coupleImage" label="Overlay Couple Photo" />
+      </CardContent>
+    </Card>
+    </>
   );
 }

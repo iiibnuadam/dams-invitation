@@ -23,6 +23,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { SortableItem } from "../SortableItem";
+import ImageUploadInput from "./ImageUploadInput";
 
 export default function GiftForm() {
     const { control, register, watch } = useFormContext();
@@ -52,9 +53,9 @@ export default function GiftForm() {
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle>Gift & Payment Methods</CardTitle>
+            <CardTitle>Gift Methods (Data Gift)</CardTitle>
             <CardDescription>
-              Add bank accounts or address for gifts. Reorder or hide.
+              Manage Bank Account, QRIS, or Gift Address.
             </CardDescription>
           </div>
           <Button
@@ -123,63 +124,88 @@ export default function GiftForm() {
                       </div>
                     </div>
 
-                    <div className="space-y-4">
-                      <div className="space-y-2">
-                        <Label>Type</Label>
-                        <select
-                          {...register(`paymentMethods.${index}.type`)}
-                          className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        >
-                          <option value="bank">Bank Transfer</option>
-                          <option value="address">Send Gift (Address)</option>
-                        </select>
-                      </div>
+                      <div className="space-y-4">
+                        <div className="space-y-2">
+                          <Label>Method Type</Label>
+                          <select
+                            {...register(`paymentMethods.${index}.type`)}
+                            className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          >
+                            <option value="bank">Bank Transfer</option>
+                            <option value="qris">QRIS (QR Code)</option>
+                            <option value="address">Send Gift (Address)</option>
+                          </select>
+                        </div>
 
-                      {methodType === "bank" || !methodType ? (
-                        <>
-                          <div className="grid grid-cols-2 gap-4">
+                        {methodType === "address" ? (
+                          <>
                             <div className="space-y-2">
-                              <Label>Bank Name</Label>
+                              <Label>Recipient Label (e.g. Home, Office)</Label>
                               <Input
-                                placeholder="BCA / Mandiri"
-                                {...register(`paymentMethods.${index}.bank`)}
+                                placeholder="Home"
+                                {...register(`paymentMethods.${index}.name`)}
                               />
                             </div>
                             <div className="space-y-2">
-                              <Label>Account Number</Label>
-                              <Input
-                                placeholder="1234567890"
-                                {...register(`paymentMethods.${index}.number`)}
+                              <Label>Full Address</Label>
+                              <Textarea
+                                placeholder="Jl. Example No. 123, City, Postal Code"
+                                {...register(`paymentMethods.${index}.address`)}
                               />
                             </div>
-                          </div>
-                          <div className="space-y-2">
-                            <Label>Account Holder / Name</Label>
-                            <Input
-                              placeholder="Recipient Name"
-                              {...register(`paymentMethods.${index}.holder`)}
-                            />
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="space-y-2">
-                            <Label>Recipient Name / Label</Label>
-                            <Input
-                              placeholder="Home / Office"
-                              {...register(`paymentMethods.${index}.name`)}
-                            />
-                          </div>
-                          <div className="space-y-2">
-                            <Label>Full Address</Label>
-                            <Textarea
-                              placeholder="Jl. Example No. 123, City"
-                              {...register(`paymentMethods.${index}.address`)}
-                            />
-                          </div>
-                        </>
-                      )}
-                    </div>
+                          </>
+                        ) : methodType === "qris" ? (
+                          <>
+                             <div className="space-y-2">
+                                <Label>QRIS / E-Wallet Name</Label>
+                                <Input
+                                  placeholder="GoPay / OVO / Dana / Mandiri QR"
+                                  {...register(`paymentMethods.${index}.bank`)}
+                                />
+                             </div>
+                             <div className="space-y-2">
+                                <Label>Account Name (Merchant)</Label>
+                                <Input
+                                  placeholder="a.n. Sasti & Adam"
+                                  {...register(`paymentMethods.${index}.holder`)}
+                                />
+                             </div>
+                             <div className="space-y-2">
+                                <Label>QR Code Image</Label>
+                                <ImageUploadInput 
+                                    name={`paymentMethods.${index}.image`}
+                                    label="Upload QR Code"
+                                />
+                             </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="grid grid-cols-2 gap-4">
+                              <div className="space-y-2">
+                                <Label>Bank Name</Label>
+                                <Input
+                                  placeholder="BCA / Mandiri"
+                                  {...register(`paymentMethods.${index}.bank`)}
+                                />
+                              </div>
+                              <div className="space-y-2">
+                                <Label>Account Number</Label>
+                                <Input
+                                  placeholder="1234567890"
+                                  {...register(`paymentMethods.${index}.number`)}
+                                />
+                              </div>
+                            </div>
+                            <div className="space-y-2">
+                              <Label>Account Holder</Label>
+                              <Input
+                                placeholder="Recipient Name"
+                                {...register(`paymentMethods.${index}.holder`)}
+                              />
+                            </div>
+                          </>
+                        )}
+                      </div>
                   </div>
                 </SortableItem>
               );

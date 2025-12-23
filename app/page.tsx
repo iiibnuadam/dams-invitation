@@ -12,6 +12,7 @@ import Gift from "@/components/Gift";
 import Comments from "@/components/Comments";
 import Footer from "@/components/Footer";
 import MusicPlayer from "@/components/MusicPlayer";
+import StickyHeader from "@/components/StickyHeader";
 
 export default function Home() {
   const [data, setData] = useState<any>(null);
@@ -49,8 +50,20 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-background text-foreground selection:bg-accent selection:text-white">
+    <main className="min-h-screen bg-background text-foreground selection:bg-accent selection:text-white relative">
+      {/* Mega Mendung Background Overlay */}
+      <div 
+        className="fixed inset-0 z-10 opacity-[0.05] pointer-events-none"
+        style={{
+          backgroundImage: "url('/patterns/megamendung.png')",
+          backgroundRepeat: "repeat",
+          backgroundSize: "400px",
+        }}
+      />
+      
       <Overlay onOpen={() => setIsOpened(true)} data={data} />
+      
+      <StickyHeader isOpened={isOpened} data={data} />
       
       {/* 
           We render the main content but maybe hidden or underneath until opened?

@@ -13,7 +13,8 @@ interface GiftProps {
       holder?: string;
       name?: string;
       address?: string;
-      type: "bank" | "address";
+      image?: string;
+      type: "bank" | "address" | "qris";
     }[];
   };
 }
@@ -54,13 +55,18 @@ export default function Gift({ data }: GiftProps) {
                     className="relative p-8 rounded-2xl border border-border bg-white shadow-xl hover:shadow-2xl transition-shadow w-full md:w-96 text-left"
                 >
                     <div className="absolute top-0 right-0 p-4 opacity-10">
-                        <Icon icon={method.type === 'bank' ? "ph:bank-light" : "ph:house-line-light"} className="text-6xl" />
+                        <Icon 
+                           icon={method.type === 'bank' ? "ph:bank-light" : method.type === 'qris' ? "ph:qr-code-light" : "ph:house-line-light"} 
+                           className="text-6xl" 
+                        />
                     </div>
 
                     <div className="mb-8">
-                        <h3 className="font-heading text-2xl mb-1">{method.type === 'bank' ? method.bank : method.name}</h3>
+                        <h3 className="font-heading text-2xl mb-1">
+                            {method.type === 'bank' ? method.bank : method.type === 'qris' ? method.bank : method.name}
+                        </h3>
                         <p className="text-sm text-muted-foreground uppercase tracking-wider">
-                            {method.type === 'bank' ? 'Bank Transfer' : 'Gift Address'}
+                            {method.type === 'bank' ? 'Bank Transfer' : method.type === 'qris' ? 'Scan QRIS' : 'Gift Address'}
                         </p>
                     </div>
 
@@ -70,6 +76,20 @@ export default function Gift({ data }: GiftProps) {
                                 <p className="text-2xl font-mono tracking-wide text-foreground">{method.number}</p>
                                 <p className="text-sm text-muted-foreground">a.n. {method.holder}</p>
                             </>
+                        ) : method.type === 'qris' ? (
+                            <div className="flex flex-col items-center gap-2">
+                                {method.image ? (
+                                    <div className="w-48 h-48 bg-white p-2 rounded-lg border shadow-sm">
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img src={method.image} alt="QRIS" className="w-full h-full object-contain" />
+                                    </div>
+                                ) : (
+                                    <div className="w-48 h-48 bg-muted flex items-center justify-center text-muted-foreground text-xs text-center p-2 rounded-lg">
+                                        No QR Code Uploaded
+                                    </div>
+                                )}
+                                <p className="text-sm text-muted-foreground mt-2">a.n. {method.holder}</p>
+                            </div>
                         ) : (
                             <>
                                 <p className="text-lg font-serif italic text-foreground leading-relaxed">
@@ -79,17 +99,19 @@ export default function Gift({ data }: GiftProps) {
                         )}
                     </div>
 
-                    <Button 
-                        variant="outline" 
-                        className="w-full rounded-full gap-2 border-primary/20 hover:bg-primary/5 group"
-                        onClick={() => handleCopy(method.type === 'bank' ? method.number! : method.address!, index)}
-                    >
-                        <Icon 
-                            icon={copiedIndex === index ? "ph:check-light" : "ph:copy-light"} 
-                            className={`text-lg transition-all ${copiedIndex === index ? 'text-green-600' : ''}`} 
-                        />
-                        {copiedIndex === index ? "Copied!" : (method.type === 'bank' ? "Copy Number" : "Copy Address")}
-                    </Button>
+                    {method.type !== 'qris' && (
+                        <Button 
+                            variant="outline" 
+                            className="w-full rounded-full gap-2 border-primary/20 hover:bg-primary/5 group"
+                            onClick={() => handleCopy(method.type === 'bank' ? method.number! : method.address!, index)}
+                        >
+                            <Icon 
+                                icon={copiedIndex === index ? "ph:check-light" : "ph:copy-light"} 
+                                className={`text-lg transition-all ${copiedIndex === index ? 'text-green-600' : ''}`} 
+                            />
+                            {copiedIndex === index ? "Copied!" : (method.type === 'bank' ? "Copy Number" : "Copy Address")}
+                        </Button>
+                    )}
                 </motion.div>
             ))}
         </div>

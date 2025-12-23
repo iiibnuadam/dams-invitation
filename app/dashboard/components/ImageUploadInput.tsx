@@ -8,6 +8,7 @@ import { Loader2, Upload, X } from "lucide-react";
 import { upload } from "@vercel/blob/client";
 import { toast } from "sonner";
 import { useFormContext } from "react-hook-form";
+import MediaLibraryModal from "./MediaLibraryModal";
 
 interface ImageUploadInputProps {
   name: string;
@@ -116,21 +117,11 @@ export default function ImageUploadInput({ name, label }: ImageUploadInputProps)
              placeholder="No image selected" 
              className="flex-1 bg-muted"
           />
-          <Button 
-            type="button" 
-            variant="outline"
-            disabled={isUploading}
-            onClick={() => fileInputRef.current?.click()}
-          >
-            {isUploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
-          </Button>
-          <input 
-            type="file" 
-            ref={fileInputRef}
-            className="hidden"
-            accept="image/*"
-            onChange={handleFileSelect}
-          />
+          
+          {/* Use Management Button Only as requested */}
+          <div className="flex-1">
+             <MediaLibraryModal onSelect={(url) => setValue(name, url, { shouldDirty: true })} />
+          </div>
         </div>
       )}
     </div>

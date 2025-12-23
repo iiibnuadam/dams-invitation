@@ -24,6 +24,8 @@ export const metadata: Metadata = {
   description: "Official Wedding Invitation",
 };
 
+import LoveCursor from "@/components/LoveCursor";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,8 +34,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cormorant.variable} ${jost.variable} ${greatVibes.variable} antialiased font-sans`}
+        className={`${cormorant.variable} ${jost.variable} ${greatVibes.variable} antialiased font-sans cursor-none`}
       >
+        <LoveCursor />
         {children}
       </body>
     </html>

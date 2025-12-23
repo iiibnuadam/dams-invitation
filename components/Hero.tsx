@@ -48,7 +48,7 @@ export default function Hero({ data }: HeroProps) {
 
         {/* Photo Frame with Arch Shape */}
         <div className="relative mt-8 mb-12 w-64 h-80 md:w-80 md:h-[30rem] border border-border/60 p-3 rounded-t-full shadow-lg bg-white/50 backdrop-blur-sm">
-            <div className="w-full h-full rounded-t-full bg-muted overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700">
+            <div className="w-full h-full rounded-t-full bg-muted overflow-hidden relative  transition-all duration-700">
                 {data.hero.image ? (
                   <img 
                     src={data.hero.image} 
