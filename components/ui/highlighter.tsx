@@ -27,6 +27,7 @@ interface HighlighterProps {
   isView?: boolean
   repeat?: boolean
   repeatDelay?: number
+  play?: boolean
 }
 
 export function Highlighter({
@@ -41,6 +42,7 @@ export function Highlighter({
   isView = false,
   repeat = false,
   repeatDelay = 2000,
+  play = true,
 }: HighlighterProps) {
   const elementRef = useRef<HTMLSpanElement>(null)
   const annotationRef = useRef<RoughAnnotation | null>(null)
@@ -51,7 +53,8 @@ export function Highlighter({
   })
 
   // If isView is false, always show. If isView is true, wait for inView
-  const shouldShow = !isView || isInView
+  // AND wait for 'play' to be true.
+  const shouldShow = play && (!isView || isInView)
 
   useEffect(() => {
     if (!shouldShow) return
