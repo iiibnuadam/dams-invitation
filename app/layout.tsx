@@ -22,6 +22,9 @@ const greatVibes = Great_Vibes({
 export const metadata: Metadata = {
   title: "The Wedding of Sasti & Adam",
   description: "Official Wedding Invitation",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 import LoveCursor from "@/components/LoveCursor";
