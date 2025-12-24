@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
+import { Highlighter } from "@/components/ui/highlighter";
+import FloralOrnament from "@/components/FloralOrnament";
 
 interface HeroProps {
+  isOpened?: boolean;
   data: {
     hero: {
       heading: string;
@@ -19,7 +22,7 @@ interface HeroProps {
   };
 }
 
-export default function Hero({ data }: HeroProps) {
+export default function Hero({ data, isOpened = false }: HeroProps) {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-12 overflow-hidden bg-background">
       {/* Background Decor */}
@@ -32,12 +35,16 @@ export default function Hero({ data }: HeroProps) {
         transition={{ duration: 1, ease: "easeOut" }}
         className="relative z-10 flex flex-col items-center gap-6 w-full max-w-4xl"
       >
-        <span className="uppercase tracking-[0.3em] text-xs md:text-sm text-muted-foreground">
-          {data.hero.heading}
+        <span className="uppercase tracking-[0.3em] text-xs md:text-sm text-muted-foreground mb-4">
+           <Highlighter action="underline" play={isOpened}>
+              {data.hero.heading}
+           </Highlighter>
         </span>
 
         <h1 className="font-heading text-6xl md:text-8xl lg:text-9xl text-foreground leading-none">
-          {data.hero.names}
+           <Highlighter action="highlight" play={isOpened}>
+              {data.hero.names}
+           </Highlighter>
         </h1>
 
         <div className="flex items-center gap-6 text-lg md:text-xl font-light text-muted-foreground my-2">
@@ -48,6 +55,17 @@ export default function Hero({ data }: HeroProps) {
 
         {/* Photo Frame with Arch Shape */}
         <div className="relative mt-8 mb-12 w-64 h-80 md:w-80 md:h-[30rem] border border-border/60 p-3 rounded-t-full shadow-lg bg-white/50 backdrop-blur-sm">
+            <FloralOrnament 
+                position="bottom-left" 
+                className="-bottom-10 -left-10 w-40 h-40 opacity-50 z-20" 
+                delay={0}
+            />
+             <FloralOrnament 
+                position="top-right" 
+                className="-top-10 -right-10 w-40 h-40 opacity-50 z-20" 
+                delay={1}
+            />
+            
             <div className="w-full h-full rounded-t-full bg-muted overflow-hidden relative  transition-all duration-700">
                 {data.hero.image ? (
                   <img 

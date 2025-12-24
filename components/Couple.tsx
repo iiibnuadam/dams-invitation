@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
+import FloralOrnament from "@/components/FloralOrnament";
 import OrbitingCircles from "./OrbitingCircles";
 
 interface CoupleProps {
@@ -47,9 +48,16 @@ export default function Couple({ data }: CoupleProps) {
                 viewport={{ once: true }}
                 className="flex flex-col items-center text-center space-y-6"
             >
+
+
                 <div className="relative w-64 h-80 flex items-center justify-center">
+                   <FloralOrnament 
+                        position="bottom-left" 
+                        className="-bottom-12 -left-12 w-48 h-48 opacity-30 rotate-[-15deg] z-20"
+                        delay={0.5}
+                   />
                     {/* Orbiting Circles Foreground */}
-                    <div className="absolute inset-0 z-20 pointer-events-none">
+                    <div className="absolute inset-0 z-30 pointer-events-none">
                          <OrbitingCircles radius={190} duration={20} delay={0}>
                             <Icon icon="ph:heart-fill" className="text-3xl text-rose-400" />
                          </OrbitingCircles>
@@ -73,6 +81,8 @@ export default function Couple({ data }: CoupleProps) {
                         )}
                     </div>
                 </div>
+
+
                 <div className="space-y-2">
                     <h3 className="font-heading text-3xl md:text-4xl">{data.mempelai.wanita.namaLengkap}</h3>
                     <p className="text-sm uppercase tracking-wider text-muted-foreground">The Bride</p>
@@ -95,8 +105,13 @@ export default function Couple({ data }: CoupleProps) {
                 className="flex flex-col items-center text-center space-y-6 md:mt-24" // Offset for layout interest
             >
                 <div className="relative w-64 h-80 flex items-center justify-center">
+                    <FloralOrnament 
+                        position="top-right" 
+                        className="-top-12 -right-12 w-48 h-48 opacity-30 rotate-[15deg] z-20"
+                        delay={1.5}
+                   />
                     {/* Orbiting Circles Foreground */}
-                    <div className="absolute inset-0 z-20 pointer-events-none">
+                    <div className="absolute inset-0 z-30 pointer-events-none">
                          <OrbitingCircles radius={190} duration={25} delay={5}>
                             <Icon icon="ph:heart-fill" className="text-3xl text-blue-400" />
                          </OrbitingCircles>

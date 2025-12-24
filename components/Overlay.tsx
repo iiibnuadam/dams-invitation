@@ -6,6 +6,8 @@ import { Icon } from "@iconify/react";
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
 
+import FloralOrnament from "@/components/FloralOrnament";
+
 interface OverlayProps {
   onOpen: () => void;
   data: {
@@ -27,12 +29,7 @@ export default function Overlay({ onOpen, data }: OverlayProps) {
 
   const handleOpen = () => {
     setIsVisible(false);
-    // Trigger parent callback after animation starts or finishes?
-    // Let's call it immediately so parent can start mounting/animating other things underneath if needed,
-    // or wait for exit. Better to wait for exit completes?
-    // AnimatePresence handles the remove from DOM.
-    // We can call onOpen immediately if we want Hero to animate IN while this animates OUT (parallax).
-    onOpen(); 
+    // onOpen will be called after exit animation via AnimatePresence
   };
 
   useEffect(() => {
@@ -47,7 +44,7 @@ export default function Overlay({ onOpen, data }: OverlayProps) {
   }, [isVisible]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence onExitComplete={onOpen}>
       {isVisible && (
         <motion.div
           initial={{ opacity: 1 }}
@@ -62,6 +59,16 @@ export default function Overlay({ onOpen, data }: OverlayProps) {
         >
             <div className={`absolute inset-0 ${data.overlay?.backgroundImage ? 'bg-black/40' : 'bg-background/90'}`} />
             
+            <FloralOrnament 
+                position="top-left" 
+                className={data.overlay?.backgroundImage ? "text-white/40" : "text-foreground/20"} 
+            />
+            <FloralOrnament 
+                position="bottom-right" 
+                delay={1}
+                className={data.overlay?.backgroundImage ? "text-white/40" : "text-foreground/20"} 
+            />
+
             <motion.div 
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -94,14 +101,33 @@ export default function Overlay({ onOpen, data }: OverlayProps) {
                     <h2 className={`text-xl font-medium ${data.overlay?.backgroundImage ? 'text-white' : 'text-foreground'}`}>{guestName}</h2>
                 </div>
 
-                <div className="mt-8">
-                    <Button 
+                <div className="mt-12">
+                    <motion.button
                         onClick={handleOpen}
-                        className="rounded-full px-8 py-6 text-base font-light transition-all hover:scale-105 bg-white text-black hover:bg-white/90"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="group relative px-8 py-4 bg-white text-black rounded-full shadow-[0_0_30px_-5px_rgba(255,255,255,0.4)] transition-all"
                     >
-                        <Icon icon="ph:envelope-open-light" className="mr-2 text-xl" />
-                        Buka Undangan
-                    </Button>
+                        {/* Ripple/Pulse Ring behind */}
+                        <span className="absolute -inset-1 rounded-full border border-white/30 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+                        <span className="absolute -inset-2 rounded-full border border-white/10 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700 delay-75" />
+                        
+                        <div className="relative flex items-center gap-3">
+                            <motion.div
+                                animate={{ 
+                                    y: [0, -4, 0],
+                                }}
+                                transition={{
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                            >
+                                <Icon icon="ph:envelope-open-duotone" className="text-2xl text-chart-3" />
+                            </motion.div>
+                            <span className="font-heading tracking-widest uppercase text-sm font-semibold">Buka Undangan</span>
+                        </div>
+                    </motion.button>
                 </div>
             </motion.div>
         </motion.div>

@@ -13,11 +13,8 @@ export default function GalleryForm() {
   const gallery = watch("gallery") || [];
 
   const handleAddFromLibrary = (url: string) => {
-      // Check if already exists
-      if (gallery.includes(url)) {
-          toast.error("Image already in gallery");
-          return;
-      }
+      // User specifically requested to allow duplicates ("nambahin foto yang sama")
+      // So we just add it without checking includes()
       setValue("gallery", [...gallery, url], { shouldDirty: true });
       toast.success("Image added to gallery");
   };

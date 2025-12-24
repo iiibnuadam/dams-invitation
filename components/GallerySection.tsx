@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import { useState } from "react";
@@ -10,8 +10,13 @@ interface GallerySectionProps {
   images: string[];
 }
 
+interface ImageState {
+  url: string;
+  index: number;
+}
+
 export default function GallerySection({ images }: GallerySectionProps) {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<ImageState | null>(null);
 
   if (!images || images.length === 0) return null;
 
@@ -41,60 +46,156 @@ export default function GallerySection({ images }: GallerySectionProps) {
           </p>
         </motion.div>
 
-        {/* Masonry-style Grid */}
-        <div className="columns-1 md:columns-3 gap-4 space-y-4">
-          {images.map((url, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl bg-muted"
-              onClick={() => setSelectedImage(url)}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={url}
-                alt={`Wedding Moment ${index + 1}`}
-                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                 <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white">
-                    <Icon icon="ph:magnifying-glass-plus" className="w-5 h-5" />
-                 </div>
-              </div>
-            </motion.div>
-          ))}
+        {/* Bento Grid */}
+        <div className={cn(
+             "grid gap-4 auto-rows-[250px]",
+             // Dynamic columns based on count
+             images.length === 4 || images.length === 5 ? "grid-cols-1 md:grid-cols-3" : "grid-cols-1 md:grid-cols-4"
+        )}>
+          {images.map((url, index) => {
+             // Layout Logic
+             let patterns: string[] = [];
+             const count = images.length;
+             
+             if (count === 4) {
+                 // 4 Items: 3 Columns
+                 // Ref: [Tall] [Small] [Tall]
+                 //      [Tall] [Small] [Tall]
+                 // DOM Order: 0(Tall), 1(Small), 2(Tall), 3(Small) -> fills center hole
+                 // But standard grid auto-placement might vary if we don't specify order.
+                 // We rely on standard Row-major filling.
+                 // Slot 1: Item 0 (1x2)
+                 // Slot 2: Item 1 (1x1)
+                 // Slot 3: Item 2 (1x2)
+                 // Slot 4: Item 3 (1x1) -> goes to (Row 2, Col 2) naturally because (2,1) and (2,3) are blocked.
+                 patterns = [
+                    "md:row-span-2", // 0
+                    "md:col-span-1", // 1
+                    "md:row-span-2", // 2
+                    "md:col-span-1", // 3
+                 ];
+             } else if (count === 5) {
+                // 5 Items: 3 Columns, 3 Rows - Symmetric "Seimbang"
+                // Col 1: Medium (2r) + Kecil (1r)
+                // Col 2: Panjang (3r)
+                // Col 3: Medium (2r) + Kecil (1r)
+                // Placing:
+                // 0 (Med) -> (0,0)-(1,0)
+                // 1 (Panjang) -> (0,1)-(2,1)
+                // 2 (Med) -> (0,2)-(1,2)
+                // 3 (Small) -> (2,0)
+                // 4 (Small) -> (2,2)
+                patterns = [
+                    "md:row-span-2", // 0 (Left Top)
+                    "md:row-span-3", // 1 (Center)
+                    "md:col-span-1", // 4 (Right Bottom)
+                    "md:row-span-2", // 2 (Right Top)
+                    "md:col-span-1", // 3 (Left Bottom)
+                ];
+             } else if (count === 6) {
+                // 6 Items
+                patterns = [
+                    "md:col-span-2 md:row-span-2", 
+                    "md:col-span-2 md:row-span-1", 
+                    "md:col-span-2 md:row-span-1", 
+                    "md:col-span-1 md:row-span-1", 
+                    "md:col-span-1 md:row-span-1", 
+                    "md:col-span-2 md:row-span-1", 
+                ];
+             } else if (count === 7) {
+                // 7 Items
+                patterns = [
+                    "md:col-span-2 md:row-span-2",
+                    "md:col-span-1 md:row-span-1",
+                    "md:col-span-1 md:row-span-1",
+                    "md:col-span-1 md:row-span-1",
+                    "md:col-span-1 md:row-span-1",
+                    "md:col-span-2 md:row-span-1",
+                    "md:col-span-2 md:row-span-1",
+                ];
+             } else {
+                 // Default 8
+                 patterns = [
+                    "md:col-span-2 md:row-span-2", 
+                    "md:col-span-1 md:row-span-1", 
+                    "md:col-span-1 md:row-span-1", 
+                    "md:col-span-1 md:row-span-1", 
+                    "md:col-span-1 md:row-span-1", 
+                    "md:col-span-2 md:row-span-1", 
+                    "md:col-span-1 md:row-span-1", 
+                    "md:col-span-1 md:row-span-1", 
+                 ];
+             }
+             
+             const spanClass = patterns[index % patterns.length];
+
+             return (
+                <motion.div
+                  key={index}
+                  layoutId={`gallery-${index}`}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  className={cn(
+                      "relative group cursor-pointer overflow-hidden rounded-xl bg-muted",
+                      spanClass
+                  )}
+                  onClick={() => setSelectedImage({ url, index })}
+                >
+                  <motion.img
+                    src={url}
+                    alt={`Wedding Moment ${index + 1}`}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                     <div className="w-12 h-12 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center text-white border border-white/40">
+                        <Icon icon="ph:arrows-out-simple" className="w-6 h-6" />
+                     </div>
+                  </div>
+                </motion.div>
+             );
+          })}
         </div>
       </div>
 
       {/* Lightbox Modal */}
-      {selectedImage && (
-        <div 
-            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
-            onClick={() => setSelectedImage(null)}
-        >
-            <button 
-                className="absolute top-4 right-4 text-white/50 hover:text-white transition-colors p-2"
+      <AnimatePresence>
+          {selectedImage && (
+            <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4"
                 onClick={() => setSelectedImage(null)}
             >
-                <Icon icon="ph:x" className="w-8 h-8" />
-            </button>
-            <div 
-                className="relative max-w-5xl w-full max-h-[90vh] flex items-center justify-center"
-                onClick={(e) => e.stopPropagation()}
-            >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                    src={selectedImage} 
-                    alt="Gallery Preview" 
-                    className="max-w-full max-h-[90vh] object-contain rounded-md shadow-2xl"
-                />
-            </div>
-        </div>
-      )}
+                <button 
+                    className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors p-2 z-50 bg-black/20 rounded-full"
+                    onClick={() => setSelectedImage(null)}
+                >
+                    <Icon icon="ph:x" className="w-8 h-8" />
+                </button>
+                
+                <div 
+                    className="relative w-full h-full flex items-center justify-center"
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    <motion.div 
+                        layoutId={`gallery-${selectedImage.index}`} // Match the layoutId
+                        className="relative max-w-5xl max-h-[90vh] overflow-hidden rounded-lg shadow-2xl"
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    >
+                        <motion.img 
+                            src={selectedImage.url} 
+                            alt="Gallery Preview" 
+                            className="w-full h-full object-contain max-h-[90vh]"
+                        />
+                    </motion.div>
+                </div>
+            </motion.div>
+          )}
+      </AnimatePresence>
     </section>
   );
 }

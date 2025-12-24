@@ -13,6 +13,7 @@ import Comments from "@/components/Comments";
 import Footer from "@/components/Footer";
 import MusicPlayer from "@/components/MusicPlayer";
 import StickyHeader from "@/components/StickyHeader";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export default function Home() {
   const [data, setData] = useState<any>(null);
@@ -32,13 +33,8 @@ export default function Home() {
         setLoading(false);
       });
   }, []);
-
   if (loading) {
-    return (
-      <div className="h-screen w-screen flex items-center justify-center bg-background text-foreground">
-        Loading...
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   if (!data || data.error) {
@@ -72,7 +68,7 @@ export default function Home() {
           However, to prevent scroll, we handled that in Overlay.
       */}
       <div>
-        <Hero data={data} />
+        <Hero data={data} isOpened={isOpened} />
         <Countdown targetDate={data.acara.find((e: any) => e.title.includes("Akad"))?.tanggal || data.acara[0]?.tanggal} />
         <Couple data={data} />
         <Events data={data} />
