@@ -14,11 +14,13 @@ interface OverlayProps {
     hero: {
       heading: string;
       names: string;
+      date: string;
     };
     overlay?: {
       backgroundImage?: string;
       coupleImage?: string;
     };
+    isLocked?: boolean;
   };
 }
 
@@ -26,8 +28,10 @@ export default function Overlay({ onOpen, data }: OverlayProps) {
   const [isVisible, setIsVisible] = useState(true);
   const searchParams = useSearchParams();
   const guestName = searchParams.get("to") || "Tamu Undangan";
+  const isLocked = data.isLocked || false;
 
   const handleOpen = () => {
+    if (isLocked) return;
     setIsVisible(false);
     // onOpen will be called after exit animation via AnimatePresence
   };
@@ -94,6 +98,17 @@ export default function Overlay({ onOpen, data }: OverlayProps) {
                     {data.hero.names}
                 </h1>
 
+                {/* Date Display (Blurred if Locked) */}
+                {isLocked && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className={`text-lg md:text-xl font-light tracking-widest my-2 blur-sm select-none ${data.overlay?.backgroundImage ? 'text-white/80' : 'text-muted-foreground'}`}
+                    >
+                        {data.hero.date}
+                    </motion.div>
+                )}
+
                 <div className={`my-8 h-px w-24 ${data.overlay?.backgroundImage ? 'bg-white/30' : 'bg-border'}`} />
 
                 <div className="space-y-2">
@@ -104,28 +119,39 @@ export default function Overlay({ onOpen, data }: OverlayProps) {
                 <div className="mt-12">
                     <motion.button
                         onClick={handleOpen}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="group relative px-8 py-4 bg-white text-black rounded-full shadow-[0_0_30px_-5px_rgba(255,255,255,0.4)] transition-all"
+                        disabled={isLocked}
+                        whileHover={!isLocked ? { scale: 1.05 } : {}}
+                        whileTap={!isLocked ? { scale: 0.95 } : {}}
+                        className={`group relative px-8 py-4 bg-white text-black rounded-full shadow-[0_0_30px_-5px_rgba(255,255,255,0.4)] transition-all ${isLocked ? 'opacity-70 cursor-not-allowed' : ''}`}
                     >
-                        {/* Ripple/Pulse Ring behind */}
-                        <span className="absolute -inset-1 rounded-full border border-white/30 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
-                        <span className="absolute -inset-2 rounded-full border border-white/10 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700 delay-75" />
+                        {!isLocked && (
+                            <>
+                                {/* Ripple/Pulse Ring behind */}
+                                <span className="absolute -inset-1 rounded-full border border-white/30 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+                                <span className="absolute -inset-2 rounded-full border border-white/10 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700 delay-75" />
+                            </>
+                        )}
                         
                         <div className="relative flex items-center gap-3">
                             <motion.div
-                                animate={{ 
+                                animate={!isLocked ? { 
                                     y: [0, -4, 0],
-                                }}
+                                } : {}}
                                 transition={{
                                     duration: 2,
                                     repeat: Infinity,
                                     ease: "easeInOut"
                                 }}
                             >
-                                <Icon icon="ph:envelope-open-duotone" className="text-2xl text-chart-3" />
+                                {isLocked ? (
+                                    <Icon icon="ph:lock-duotone" className="text-2xl text-muted-foreground" />
+                                ) : (
+                                    <Icon icon="ph:envelope-open-duotone" className="text-2xl text-chart-3" />
+                                )}
                             </motion.div>
-                            <span className="font-heading tracking-widest uppercase text-sm font-semibold">Buka Undangan</span>
+                            <span className="font-heading tracking-widest uppercase text-sm font-semibold">
+                                {isLocked ? "Coming Soon" : "Buka Undangan"}
+                            </span>
                         </div>
                     </motion.button>
                 </div>

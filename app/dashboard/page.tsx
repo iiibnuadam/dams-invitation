@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import * as z from "zod";
-import { Loader2, LayoutDashboard, Heart, Calendar, Gift, BookOpen, MessageSquare, Code, Save, LogOut, Menu, X, Image as ImageIcon } from "lucide-react";
+import { Loader2, LayoutDashboard, Heart, Calendar, Gift, BookOpen, MessageSquare, Code, Save, LogOut, Menu, X, Image as ImageIcon, Lock } from "lucide-react";
 import { Icon } from "@iconify/react";
 import { toast } from "sonner";
 
@@ -20,6 +20,7 @@ import GiftForm from "./components/GiftForm";
 import CommentsForm from "./components/CommentsForm";
 import GalleryForm from "./components/GalleryForm";
 import MediaManagerForm from "./components/MediaManagerForm";
+import SettingsForm from "./components/SettingsForm";
 
 // Schema (Kept same as before)
 const invitationSchema = z.object({
@@ -82,7 +83,8 @@ const invitationSchema = z.object({
       isFavorite: z.boolean().default(false)
   })).optional(),
   gallery: z.array(z.string()).optional(),
-  mediaLibrary: z.array(z.string()).optional()
+  mediaLibrary: z.array(z.string()).optional(),
+  isLocked: z.boolean().default(false).optional()
 });
 
 type InvitationFormValues = z.infer<typeof invitationSchema>;
@@ -96,6 +98,7 @@ const MENU_ITEMS = [
   { id: "gallery", label: "Gallery Section", icon: ImageIcon },
   { id: "media", label: "Media Manager", icon: ImageIcon },
   { id: "comments", label: "Comments", icon: MessageSquare },
+  { id: "settings", label: "Settings", icon: Lock },
   { id: "json", label: "Raw JSON", icon: Code },
 ];
 
@@ -294,6 +297,7 @@ export default function DashboardPage() {
                         {activeSection === "gallery" && <GalleryForm />}
                         {activeSection === "media" && <MediaManagerForm />}
                         {activeSection === "comments" && <CommentsForm onRefresh={fetchData} />}
+                        {activeSection === "settings" && <SettingsForm />}
                         
                         {activeSection === "json" && (
                             <Card>
