@@ -29,6 +29,7 @@ interface OverlayProps {
 export default function Overlay({ onOpen, data }: OverlayProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [showPasswordInput, setShowPasswordInput] = useState(false);
+  const [showPasswordInputType, setShowPasswordInputType] = useState(false);
   const [passwordInput, setPasswordInput] = useState("");
   const [errorShake, setErrorShake] = useState(false);
   
@@ -150,14 +151,23 @@ export default function Overlay({ onOpen, data }: OverlayProps) {
                                 onSubmit={handleUnlockAttempt}
                                 className="flex items-center gap-2"
                              >
-                                <input
-                                    autoFocus
-                                    type="password"
-                                    placeholder="Enter Password"
-                                    value={passwordInput}
-                                    onChange={(e) => setPasswordInput(e.target.value)}
-                                    className="px-4 py-3 bg-white/10 backdrop-blur border border-white/20 rounded-lg text-center text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 w-48"
-                                />
+                                <div className="relative">
+                                    <input
+                                        autoFocus={true}
+                                        type={showPasswordInputType ? "text" : "password"}
+                                        placeholder="Enter Password"
+                                        value={passwordInput}
+                                        onChange={(e) => setPasswordInput(e.target.value)}
+                                        className="pl-4 pr-10 py-3 bg-white/10 backdrop-blur border border-white/20 rounded-lg text-center text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 w-48"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPasswordInputType(!showPasswordInputType)}
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors"
+                                    >
+                                        <Icon icon={showPasswordInputType ? "ph:eye-slash" : "ph:eye"} className="w-5 h-5" />
+                                    </button>
+                                </div>
                                 <Button 
                                     type="submit" 
                                     size="icon" 

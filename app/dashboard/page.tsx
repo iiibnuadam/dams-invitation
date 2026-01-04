@@ -180,6 +180,15 @@ export default function DashboardPage() {
     }
   };
 // ...
+  const handleLogout = async () => {
+    try {
+        await fetch("/api/auth/logout", { method: "POST" });
+        window.location.href = "/login";
+    } catch (error) {
+        toast.error("Failed to logout");
+    }
+  };
+
   const SidebarContent = () => (
     <>
         <div className="p-6 border-b flex items-center gap-2">
@@ -211,7 +220,12 @@ export default function DashboardPage() {
         </nav>
 
         <div className="p-4 border-t">
-            <Button variant="outline" className="w-full justify-start text-muted-foreground" size="sm">
+            <Button 
+                variant="outline" 
+                className="w-full justify-start text-muted-foreground hover:bg-red-50 hover:text-red-500 hover:border-red-200 transition-colors" 
+                size="sm"
+                onClick={handleLogout}
+            >
                 <LogOut className="mr-2 h-4 w-4" />
                 Logout
             </Button>

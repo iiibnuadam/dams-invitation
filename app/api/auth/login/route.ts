@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     }
 
     // Create session
-    await login({ id: user._id, email: user.email, name: user.name });
+    await login({ id: user._id.toString(), email: user.email, name: user.name });
 
     return NextResponse.json({ success: true, user: { email: user.email, name: user.name } });
   } catch (error) {
