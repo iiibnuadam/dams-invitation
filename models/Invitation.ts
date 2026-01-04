@@ -63,6 +63,7 @@ export interface IInvitation extends Document {
   gallery: string[];
   mediaLibrary: string[];
   isLocked: boolean;
+  password?: string;
 }
 
 const InvitationSchema: Schema = new Schema(
@@ -137,6 +138,7 @@ const InvitationSchema: Schema = new Schema(
     gallery: [String],
     mediaLibrary: [String],
     isLocked: { type: Boolean, default: false },
+    password: { type: String },
   },
   { timestamps: true }
 );

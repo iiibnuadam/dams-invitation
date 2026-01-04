@@ -84,7 +84,8 @@ const invitationSchema = z.object({
   })).optional(),
   gallery: z.array(z.string()).optional(),
   mediaLibrary: z.array(z.string()).optional(),
-  isLocked: z.boolean().default(false).optional()
+  isLocked: z.boolean().default(false).optional(),
+  password: z.string().optional()
 });
 
 type InvitationFormValues = z.infer<typeof invitationSchema>;
