@@ -1,14 +1,14 @@
 {
   "hero": {
-    "heading": "The Wedding of",
-    "names": "Sasti & Adam",
-    "date": "18.07.26",
-    "image": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_11-G6NOliOWe4t0IykfU0oVkH2ZrpHosi.jpg",
     "quote": {
       "arabic": "وَمِن كُلِّ شَيْءٍ خَلَقْنَا زَوْجَيْنِ لَعَلَّكُمْ تَذَكَّرُونَ",
       "translation": "Dan segala sesuatu Kami ciptakan berpasang-pasangan agar kamu mengingat (kebesaran Allah).",
       "source": "QS. Az-Zariyat: 49"
-    }
+    },
+    "heading": "The Wedding of",
+    "names": "Sasti & Adam",
+    "date": "18.07.26",
+    "image": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_11-G6NOliOWe4t0IykfU0oVkH2ZrpHosi.jpg"
   },
   "overlay": {
     "backgroundImage": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_12-enZMzNaO5rAPFhuJQNni5J1Q24pMrI.jpg"
@@ -32,13 +32,13 @@
   "acara": [
     {
       "title": "Tasyakuran",
-      "tanggal": "2026-07-16T10:00:00.000Z",
-      "tanggalEnd": "2026-07-17T10:00:00.000Z",
+      "tanggal": "2026-07-15T00:00:00.000Z",
+      "tanggalEnd": "2026-07-16T00:00:00.000Z",
       "jam": "10:00",
       "showJam": false,
       "sampaiSelesai": false,
       "tempat": "Rumah Mempelai Pria",
-      "alamat": "Dusun Krajan, Desa Karangreja RT 01/RW 02, Kec. Karangreja, Purbalingga",
+      "alamat": "Jl. Sekar Dahlia No 29, Perumahan Griya Abdi Kencana, Purbalingga",
       "maps": "https://maps.app.goo.gl/8Z3FRMTcsaUDHrQSA",
       "enabled": true
     },
@@ -47,20 +47,20 @@
       "tanggal": "2026-07-18T09:00:00.000Z",
       "jam": "09:00 WIB",
       "showJam": true,
-      "sampaiSelesai": true,
+      "sampaiSelesai": false,
       "tempat": "Rumah Mempelai Wanita",
-      "alamat": "Jl. Ahmad Yani No. 12, Kel. Kebondalem RT 03/RW 04, Pemalang",
+      "alamat": "Jl. Ternate, Kaligelang, Kec. Taman, Pemalang",
       "maps": "https://maps.app.goo.gl/PvUzG644uedT51pi9",
       "enabled": true
     },
     {
       "title": "Resepsi",
       "tanggal": "2026-07-18T11:00:00.000Z",
-      "jam": "11:00 - 13:00 WIB",
+      "jam": "11:00 WIB",
       "showJam": true,
-      "sampaiSelesai": false,
+      "sampaiSelesai": true,
       "tempat": "Rumah Mempelai Wanita",
-      "alamat": "Jl. Ahmad Yani No. 12, Kel. Kebondalem RT 03/RW 04, Pemalang",
+      "alamat": "Jl. Ternate, Kaligelang, Kec. Taman, Pemalang",
       "maps": "https://maps.app.goo.gl/PvUzG644uedT51pi9",
       "enabled": true
     }
@@ -91,20 +91,26 @@
       "number": "1252067798",
       "holder": "Sasti Virgine Javanti",
       "type": "bank",
-      "enabled": true
+      "enabled": true,
+      "bgColor": "#1E352F",
+      "textColor": "#EBE3D5"
     },
     {
       "bank": "Mandiri",
       "number": "1370020120313",
       "holder": "Ibnu Adam",
       "type": "bank",
-      "enabled": true
+      "enabled": true,
+      "bgColor": "#141E30",
+      "textColor": "#E0E0E0"
     },
     {
       "name": "Rumah Mempelai Wanita",
-      "address": "Jl. Mempelai Wanita",
+      "address": "Jl. Ternate, Kaligelang, Kec. Taman, Pemalang",
       "type": "address",
-      "enabled": true
+      "enabled": true,
+      "bgColor": "",
+      "textColor": ""
     }
   ],
   "comments": [
@@ -120,25 +126,25 @@
     {
       "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_11-G6NOliOWe4t0IykfU0oVkH2ZrpHosi.jpg",
       "focusY": 20,
-      "cols": 2,
+      "cols": 1,
       "rows": 2
     },
     {
-      "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_12-enZMzNaO5rAPFhuJQNni5J1Q24pMrI.jpg",
-      "focusY": 50,
+      "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_3-deeb41p1uFUf5EEDJWEKYa0qGyOTqd.jpg",
+      "focusY": 39,
       "cols": 1,
       "rows": 1
     },
     {
-      "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_3-deeb41p1uFUf5EEDJWEKYa0qGyOTqd.jpg",
-      "focusY": 50,
+      "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_12-enZMzNaO5rAPFhuJQNni5J1Q24pMrI.jpg",
+      "focusY": 36,
       "cols": 1,
-      "rows": 1
+      "rows": 2
     },
     {
       "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_10-HIADybgejWvCrNK5MedYyD8FHYq1pE.jpg",
-      "focusY": 20,
-      "cols": 2,
+      "focusY": 50,
+      "cols": 1,
       "rows": 1
     }
   ],
@@ -153,5 +159,5 @@
   ],
   "isLocked": false,
   "password": "sastisayangadam",
-  "showGalleryPopup": true
+  "showGalleryPopup": false
 }
