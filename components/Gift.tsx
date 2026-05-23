@@ -110,7 +110,7 @@ export default function Gift({ data }: GiftProps) {
                      
                      <div className="flex justify-between items-start">
                        <div>
-                         <p style={{ color: customText, opacity: 0.6 }} className="text-[9px] font-semibold tracking-widest uppercase">Bank Transfer</p>
+                         <p style={{ color: customText, opacity: 0.6 }} className="text-[10px] font-semibold tracking-widest uppercase">Bank Transfer</p>
                          <h3 className="font-heading text-xl mt-0.5 tracking-wide">{method.bank}</h3>
                        </div>
                        <Icon icon="ph:bank-fill" style={{ color: customText, opacity: 0.8 }} className="text-2xl" />
@@ -128,7 +128,7 @@ export default function Gift({ data }: GiftProps) {
 
                      <div style={{ borderColor: `${customText}10` }} className="flex justify-between items-end pt-3 border-t">
                        <div>
-                         <p style={{ color: customText, opacity: 0.4 }} className="text-[8px] uppercase tracking-widest">Card Holder</p>
+                         <p style={{ color: customText, opacity: 0.4 }} className="text-[10px] uppercase tracking-widest">Card Holder</p>
                          <p className="text-xs font-sans tracking-wide uppercase font-semibold">{method.holder}</p>
                        </div>
                        
@@ -159,7 +159,7 @@ export default function Gift({ data }: GiftProps) {
                      </div>
 
                      <div className="w-full text-center">
-                       <p style={{ color: customText, opacity: 0.6 }} className="text-[9px] font-semibold tracking-widest uppercase">Scan QR Code</p>
+                       <p style={{ color: customText, opacity: 0.6 }} className="text-[10px] font-semibold tracking-widest uppercase">Scan QR Code</p>
                        <h3 className="font-heading text-xl mt-0.5">{method.bank || "QRIS"}</h3>
                      </div>
 
@@ -182,7 +182,7 @@ export default function Gift({ data }: GiftProps) {
                      </div>
 
                      <div style={{ borderColor: `${customText}10` }} className="w-full pt-3 border-t">
-                       <p style={{ color: customText, opacity: 0.4 }} className="text-[8px] uppercase tracking-widest">Account Name</p>
+                       <p style={{ color: customText, opacity: 0.4 }} className="text-[10px] uppercase tracking-widest">Account Name</p>
                        <p className="text-xs font-semibold uppercase tracking-wide">{method.holder}</p>
                      </div>
                    </div>
@@ -197,7 +197,7 @@ export default function Gift({ data }: GiftProps) {
                      </div>
 
                      <div>
-                       <p style={{ color: customText, opacity: 0.6 }} className="text-[9px] font-semibold tracking-widest uppercase">Kirim Kado / Hadiah</p>
+                       <p style={{ color: customText, opacity: 0.6 }} className="text-[10px] font-semibold tracking-widest uppercase">Kirim Kado / Hadiah</p>
                        <h3 className="font-heading text-xl mt-0.5">Alamat Pengiriman</h3>
                      </div>
 
@@ -209,7 +209,7 @@ export default function Gift({ data }: GiftProps) {
 
                      <div style={{ borderColor: `${customText}10` }} className="flex justify-between items-end pt-3 border-t">
                        <div>
-                         <p style={{ color: customText, opacity: 0.4 }} className="text-[8px] uppercase tracking-widest">Penerima</p>
+                         <p style={{ color: customText, opacity: 0.4 }} className="text-[10px] uppercase tracking-widest">Penerima</p>
                          <p className="text-xs font-semibold uppercase tracking-wide">{method.name}</p>
                        </div>
 
@@ -318,7 +318,7 @@ export default function Gift({ data }: GiftProps) {
 
                      <div style={{ borderColor: `${customText}10` }} className="flex justify-between items-end z-10 mt-auto pt-4 border-t">
                        <div>
-                         <p style={{ color: customText, opacity: 0.4 }} className="text-[8px] uppercase tracking-widest">Card Holder</p>
+                         <p style={{ color: customText, opacity: 0.4 }} className="text-[10px] uppercase tracking-widest">Card Holder</p>
                          <p className="text-sm font-sans tracking-wide uppercase font-semibold">{method.holder}</p>
                        </div>
                        
@@ -369,7 +369,7 @@ export default function Gift({ data }: GiftProps) {
                      </div>
 
                      <div style={{ borderColor: `${customText}10` }} className="w-full mt-4 pt-4 border-t">
-                       <p style={{ color: customText, opacity: 0.4 }} className="text-[8px] uppercase tracking-widest">Account Name</p>
+                       <p style={{ color: customText, opacity: 0.4 }} className="text-[10px] uppercase tracking-widest">Account Name</p>
                        <p className="text-sm font-semibold uppercase tracking-wide">{method.holder}</p>
                      </div>
                    </div>
@@ -396,7 +396,7 @@ export default function Gift({ data }: GiftProps) {
 
                      <div style={{ borderColor: `${customText}10` }} className="flex justify-between items-end mt-auto pt-4 border-t">
                        <div>
-                         <p style={{ color: customText, opacity: 0.4 }} className="text-[8px] uppercase tracking-widest">Penerima</p>
+                         <p style={{ color: customText, opacity: 0.4 }} className="text-[10px] uppercase tracking-widest">Penerima</p>
                          <p className="text-sm font-semibold uppercase tracking-wide">{method.name}</p>
                        </div>
 

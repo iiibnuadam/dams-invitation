@@ -57,7 +57,7 @@ export default function StickyHeader({ data, isOpened }: StickyHeaderProps) {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#C5A059]/10 via-transparent to-[#C5A059]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="flex flex-col relative z-20">
-                    <span className="text-[9px] tracking-[0.2em] uppercase text-muted-foreground font-medium">The Wedding of</span>
+                    <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-medium">The Wedding of</span>
                     <span className="font-heading text-lg leading-none text-primary mt-0.5">{data.hero.names}</span>
                 </div>
                 

@@ -304,7 +304,7 @@ export default function Comments({ data }: CommentsProps) {
                                 >
                                     {/* Star / Favorite Sticker badge */}
                                     {isFavorite && (
-                                      <div className="absolute top-0 right-0 bg-accent text-[#1A1A1A] px-2 py-0.5 rounded-bl-xl text-[9px] font-bold uppercase tracking-widest flex items-center gap-1 shadow-sm select-none z-10">
+                                      <div className="absolute top-0 right-0 bg-accent text-[#1A1A1A] px-2 py-0.5 rounded-bl-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-1 shadow-sm select-none z-10">
                                         <Icon icon="ph:star-fill" className="text-[10px]" />
                                         <span>Pinned</span>
                                       </div>
