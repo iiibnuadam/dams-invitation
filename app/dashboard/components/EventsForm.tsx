@@ -128,63 +128,165 @@ export default function EventsForm() {
                     <Input {...register(`acara.${index}.title`)} />
                   </div>
 
-                  <div className="space-y-2 flex flex-col">
-                    <Label>Date</Label>
-                    <Controller
-                      control={control}
-                      name={`acara.${index}.tanggal`}
-                      render={({ field }) => (
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <Button
-                              variant={"outline"}
-                              className={cn(
-                                "w-full pl-3 text-left font-normal",
-                                !field.value && "text-muted-foreground"
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2 flex flex-col">
+                      <Label>Start Date</Label>
+                      <Controller
+                        control={control}
+                        name={`acara.${index}.tanggal`}
+                        render={({ field }) => (
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant={"outline"}
+                                className={cn(
+                                  "w-full pl-3 text-left font-normal",
+                                  !field.value && "text-muted-foreground"
+                                )}
+                              >
+                                {field.value ? (
+                                  format(new Date(field.value), "PPP")
+                                ) : (
+                                  <span>Pick a date</span>
+                                )}
+                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0" align="start">
+                              <Calendar
+                                mode="single"
+                                selected={
+                                  field.value ? new Date(field.value) : undefined
+                                }
+                                defaultMonth={
+                                  field.value ? new Date(field.value) : undefined
+                                }
+                                onSelect={(date) =>
+                                  field.onChange(
+                                    date ? format(date, "yyyy-MM-dd") : ""
+                                  )
+                                }
+                                disabled={(date) =>
+                                  date < new Date("1900-01-01")
+                                }
+                                initialFocus
+                              />
+                            </PopoverContent>
+                          </Popover>
+                        )}
+                      />
+                    </div>
+
+                    <div className="space-y-2 flex flex-col">
+                      <Label>End Date (Optional, for multi-day events)</Label>
+                      <Controller
+                        control={control}
+                        name={`acara.${index}.tanggalEnd`}
+                        render={({ field }) => (
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant={"outline"}
+                                className={cn(
+                                  "w-full pl-3 text-left font-normal",
+                                  !field.value && "text-muted-foreground"
+                                )}
+                              >
+                                {field.value ? (
+                                  format(new Date(field.value), "PPP")
+                                ) : (
+                                  <span>No End Date</span>
+                                )}
+                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0" align="start">
+                              <Calendar
+                                mode="single"
+                                selected={
+                                  field.value ? new Date(field.value) : undefined
+                                }
+                                defaultMonth={
+                                  field.value ? new Date(field.value) : undefined
+                                }
+                                onSelect={(date) =>
+                                  field.onChange(
+                                    date ? format(date, "yyyy-MM-dd") : ""
+                                  )
+                                }
+                                disabled={(date) =>
+                                  date < new Date("1900-01-01")
+                                }
+                                initialFocus
+                              />
+                              {field.value && (
+                                <div className="p-2 border-t text-center">
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => field.onChange("")}
+                                    className="text-xs text-destructive hover:bg-destructive/10"
+                                  >
+                                    Clear End Date
+                                  </Button>
+                                </div>
                               )}
-                            >
-                              {field.value ? (
-                                format(new Date(field.value), "PPP")
-                              ) : (
-                                <span>Pick a date</span>
-                              )}
-                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                            </Button>
-                          </PopoverTrigger>
-                          <PopoverContent className="w-auto p-0" align="start">
-                            <Calendar
-                              mode="single"
-                              selected={
-                                field.value ? new Date(field.value) : undefined
-                              }
-                              defaultMonth={
-                                field.value ? new Date(field.value) : undefined
-                              }
-                              onSelect={(date) =>
-                                field.onChange(
-                                  date ? format(date, "yyyy-MM-dd") : ""
-                                )
-                              }
-                              disabled={(date) =>
-                                date < new Date("1900-01-01")
-                              }
-                              initialFocus
-                            />
-                          </PopoverContent>
-                        </Popover>
-                      )}
-                    />
+                            </PopoverContent>
+                          </Popover>
+                        )}
+                      />
+                    </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label>Time</Label>
-                      <Input {...register(`acara.${index}.jam`)} />
+                      <div className="flex items-center justify-between">
+                        <Label>Time (Jam)</Label>
+                        <div className="flex items-center gap-1.5">
+                          <Label htmlFor={`event-showjam-${index}`} className="text-xs">
+                            Show Time
+                          </Label>
+                          <Controller
+                            control={control}
+                            name={`acara.${index}.showJam`}
+                            render={({ field }) => (
+                              <Switch
+                                checked={field.value !== false}
+                                onCheckedChange={field.onChange}
+                                id={`event-showjam-${index}`}
+                              />
+                            )}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex gap-2 items-center">
+                        <Input placeholder="e.g. 09:00 WIB" {...register(`acara.${index}.jam`)} />
+                        <div className="flex items-center gap-1.5 whitespace-nowrap">
+                          <Controller
+                            control={control}
+                            name={`acara.${index}.sampaiSelesai`}
+                            render={({ field }) => (
+                              <Switch
+                                checked={field.value || false}
+                                onCheckedChange={field.onChange}
+                                id={`event-sampaiselesai-${index}`}
+                              />
+                            )}
+                          />
+                          <Label htmlFor={`event-sampaiselesai-${index}`} className="text-xs">
+                            Until Finish
+                          </Label>
+                        </div>
+                      </div>
                     </div>
                     <div className="space-y-2">
-                      <Label>Venue</Label>
-                      <Input {...register(`acara.${index}.tempat`)} />
+                      <Label>Venue Name</Label>
+                      <Input placeholder="e.g. Rumah Mempelai Wanita" {...register(`acara.${index}.tempat`)} />
                     </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Detailed Address (Alamat Lengkap)</Label>
+                    <Input placeholder="e.g. Jl. Kenanga No. 45, RT 02/03, Kec. Menteng" {...register(`acara.${index}.alamat`)} />
                   </div>
                   <div className="space-y-2">
                     <Label>Maps URL</Label>

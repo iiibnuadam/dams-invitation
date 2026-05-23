@@ -44,18 +44,26 @@ const invitationSchema = z.object({
           namaLengkap: z.string(),
           putraDari: z.string(),
           fotoUrl: z.string(),
+          putraKe: z.string().optional(),
+          asal: z.string().optional(),
       }),
        wanita: z.object({
           namaLengkap: z.string(),
           putriDari: z.string(),
           fotoUrl: z.string(),
+          putriKe: z.string().optional(),
+          asal: z.string().optional(),
       })
   }),
   acara: z.array(z.object({
       title: z.string(),
       tanggal: z.string(),
-      jam: z.string(),
+      tanggalEnd: z.string().optional().nullable().or(z.literal("")),
+      jam: z.string().optional().nullable().or(z.literal("")),
+      showJam: z.boolean().default(true).optional(),
+      sampaiSelesai: z.boolean().default(false).optional(),
       tempat: z.string(),
+      alamat: z.string().optional().nullable().or(z.literal("")),
       maps: z.string(),
       enabled: z.boolean().default(true)
   })),

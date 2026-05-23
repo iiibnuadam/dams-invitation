@@ -22,18 +22,26 @@ export interface IInvitation extends Document {
       namaLengkap: string;
       putraDari: string;
       fotoUrl: string;
+      putraKe?: string;
+      asal?: string;
     };
     wanita: {
       namaLengkap: string;
       putriDari: string;
       fotoUrl: string;
+      putriKe?: string;
+      asal?: string;
     };
   };
   acara: {
     title: string;
     tanggal: Date;
-    jam: string;
+    tanggalEnd?: Date;
+    jam?: string;
+    showJam?: boolean;
+    sampaiSelesai?: boolean;
     tempat: string;
+    alamat?: string;
     maps: string;
     enabled: boolean;
   }[];
@@ -89,19 +97,27 @@ const InvitationSchema: Schema = new Schema(
         namaLengkap: String,
         putraDari: String,
         fotoUrl: String,
+        putraKe: String,
+        asal: String,
       },
       wanita: {
         namaLengkap: String,
         putriDari: String,
         fotoUrl: String,
+        putriKe: String,
+        asal: String,
       },
     },
     acara: [
       {
         title: { type: String, required: true },
         tanggal: { type: Date, required: true },
-        jam: { type: String, required: true },
+        tanggalEnd: { type: Date },
+        jam: { type: String },
+        showJam: { type: Boolean, default: true },
+        sampaiSelesai: { type: Boolean, default: false },
         tempat: { type: String, required: true },
+        alamat: { type: String },
         maps: { type: String, required: true },
         enabled: { type: Boolean, default: true },
       },

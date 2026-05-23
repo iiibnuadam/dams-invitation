@@ -12,11 +12,15 @@ interface CoupleProps {
         namaLengkap: string;
         putraDari: string;
         fotoUrl: string;
+        putraKe?: string;
+        asal?: string;
       };
       wanita: {
         namaLengkap: string;
         putriDari: string;
         fotoUrl: string;
+        putriKe?: string;
+        asal?: string;
       };
     };
   };
@@ -53,11 +57,11 @@ export default function Couple({ data }: CoupleProps) {
                 <div className="relative w-64 h-80 flex items-center justify-center">
                    <FloralOrnament 
                         position="bottom-left" 
-                        className="-bottom-12 -left-12 w-48 h-48 opacity-30 rotate-[-15deg] z-20"
+                        className="-bottom-6 md:-bottom-12 -left-6 md:-left-12 w-48 h-48 opacity-30 rotate-[-15deg] z-20"
                         delay={0.5}
                    />
                     {/* Orbiting Circles Foreground */}
-                    <div className="absolute inset-0 z-30 pointer-events-none">
+                    <div className="absolute inset-0 z-30 pointer-events-none hidden md:block">
                          <OrbitingCircles radius={190} duration={20} delay={0}>
                             <Icon icon="ph:heart-fill" className="text-3xl text-rose-400" />
                          </OrbitingCircles>
@@ -87,9 +91,15 @@ export default function Couple({ data }: CoupleProps) {
                     <h3 className="font-heading text-3xl md:text-4xl">{data.mempelai.wanita.namaLengkap}</h3>
                     <p className="text-sm uppercase tracking-wider text-muted-foreground">The Bride</p>
                     <div className="h-px w-8 bg-accent mx-auto my-2" />
-                    <p className="text-sm text-muted-foreground">
-                        Putri dari Bpk {data.mempelai.wanita.putriDari}
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                        {data.mempelai.wanita.putriKe ? `${data.mempelai.wanita.putriKe} dari` : "Putri dari"} Bpk {data.mempelai.wanita.putriDari}
                     </p>
+                    {data.mempelai.wanita.asal && (
+                        <p className="text-xs tracking-wider text-muted-foreground uppercase flex items-center justify-center gap-1 mt-1 font-sans">
+                            <Icon icon="ph:map-pin" className="text-accent text-sm" />
+                            {data.mempelai.wanita.asal}
+                        </p>
+                    )}
                 </div>
                 <div className="flex gap-4 text-muted-foreground">
                     <Icon icon="ph:instagram-logo-light" className="text-xl hover:text-accent transition-colors cursor-pointer" />
@@ -107,11 +117,11 @@ export default function Couple({ data }: CoupleProps) {
                 <div className="relative w-64 h-80 flex items-center justify-center">
                     <FloralOrnament 
                         position="top-right" 
-                        className="-top-12 -right-12 w-48 h-48 opacity-30 rotate-[15deg] z-20"
+                        className="-top-6 md:-top-12 -right-6 md:-right-12 w-48 h-48 opacity-30 rotate-[15deg] z-20"
                         delay={1.5}
                    />
                     {/* Orbiting Circles Foreground */}
-                    <div className="absolute inset-0 z-30 pointer-events-none">
+                    <div className="absolute inset-0 z-30 pointer-events-none hidden md:block">
                          <OrbitingCircles radius={190} duration={25} delay={5}>
                             <Icon icon="ph:heart-fill" className="text-3xl text-blue-400" />
                          </OrbitingCircles>
@@ -138,9 +148,15 @@ export default function Couple({ data }: CoupleProps) {
                     <h3 className="font-heading text-3xl md:text-4xl">{data.mempelai.pria.namaLengkap}</h3>
                     <p className="text-sm uppercase tracking-wider text-muted-foreground">The Groom</p>
                     <div className="h-px w-8 bg-accent mx-auto my-2" />
-                    <p className="text-sm text-muted-foreground">
-                        Putra dari Bpk {data.mempelai.pria.putraDari}
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                        {data.mempelai.pria.putraKe ? `${data.mempelai.pria.putraKe} dari` : "Putra dari"} Bpk {data.mempelai.pria.putraDari}
                     </p>
+                    {data.mempelai.pria.asal && (
+                        <p className="text-xs tracking-wider text-muted-foreground uppercase flex items-center justify-center gap-1 mt-1 font-sans">
+                            <Icon icon="ph:map-pin" className="text-accent text-sm" />
+                            {data.mempelai.pria.asal}
+                        </p>
+                    )}
                 </div>
                 <div className="flex gap-4 text-muted-foreground">
                     <Icon icon="ph:instagram-logo-light" className="text-xl hover:text-accent transition-colors cursor-pointer" />

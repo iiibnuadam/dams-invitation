@@ -9,8 +9,12 @@ interface EventsProps {
     acara: {
       title: string;
       tanggal: Date | string;
-      jam: string;
+      tanggalEnd?: Date | string;
+      jam?: string;
+      showJam?: boolean;
+      sampaiSelesai?: boolean;
       tempat: string;
+      alamat?: string;
       maps: string;
     }[];
   };
@@ -44,15 +48,55 @@ export default function Events({ data }: EventsProps) {
   );
 }
 
+function formatEventDate(startDateStr: string | Date, endDateStr?: string | Date): string {
+    const startDate = new Date(startDateStr);
+    if (!endDateStr) {
+        return startDate.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    }
+    const endDate = new Date(endDateStr);
+    
+    if (isNaN(endDate.getTime())) {
+        return startDate.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    }
+    
+    if (startDate.toDateString() === endDate.toDateString()) {
+        return startDate.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    }
+    
+    const startDay = startDate.getDate();
+    const startWeekday = startDate.toLocaleDateString('id-ID', { weekday: 'long' });
+    const endDay = endDate.getDate();
+    const endWeekday = endDate.toLocaleDateString('id-ID', { weekday: 'long' });
+    
+    const startMonth = startDate.toLocaleDateString('id-ID', { month: 'long' });
+    const endMonth = endDate.toLocaleDateString('id-ID', { month: 'long' });
+    
+    const startYear = startDate.getFullYear();
+    const endYear = endDate.getFullYear();
+    
+    if (startMonth === endMonth && startYear === endYear) {
+        return `${startWeekday} - ${endWeekday}, ${startDay} - ${endDay} ${startMonth} ${startYear}`;
+    } else if (startYear === endYear) {
+        return `${startWeekday}, ${startDay} ${startMonth} - ${endWeekday}, ${endDay} ${endMonth} ${startYear}`;
+    } else {
+        return `${startDate.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })} - ${endDate.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+    }
+}
+
 function EventCard({ event, index }: { event: any, index: number }) {
-    const { title, date, time, location, mapsLink } = {
+    const { title, location, mapsLink } = {
         title: event.title,
-        date: new Date(event.tanggal),
-        time: event.jam,
         location: event.tempat,
         mapsLink: event.maps
     };
     const delay = index * 0.2;
+    
+    const showTime = event.showJam !== false;
+    const timeText = showTime 
+        ? (event.jam 
+            ? `${event.jam}${event.sampaiSelesai ? " - Selesai" : ""}` 
+            : (event.sampaiSelesai ? "Selesai" : ""))
+        : null;
 
     return (
         <motion.div 
@@ -60,7 +104,7 @@ function EventCard({ event, index }: { event: any, index: number }) {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay, duration: 0.6 }}
             viewport={{ once: true }}
-            className="bg-white/50 backdrop-blur border border-border p-8 md:p-12 rounded-t-full rounded-b-lg text-center shadow-lg hover:shadow-xl transition-all"
+            className="w-full max-w-xl bg-white/50 backdrop-blur border border-border p-8 md:p-12 rounded-t-full rounded-b-lg text-center shadow-lg hover:shadow-xl transition-all"
         >
             <div className="mb-6">
                 <Icon icon="ph:heart-straight-light" className="text-4xl text-accent mx-auto mb-4" />
@@ -70,15 +114,22 @@ function EventCard({ event, index }: { event: any, index: number }) {
 
             <div className="space-y-4 mb-8">
                 <div>
-                    <p className="font-serif text-lg font-medium">
-                        {date.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                    <p className="font-serif text-lg font-medium leading-relaxed">
+                        {formatEventDate(event.tanggal, event.tanggalEnd)}
                     </p>
                 </div>
-                <div className="text-muted-foreground">
-                    <p>{time}</p>
-                </div>
-                <div className="pt-4 px-4 overflow-hidden text-clip">
-                    <p className="font-serif italic text-lg">{location}</p>
+                {timeText && (
+                    <div className="text-muted-foreground font-sans">
+                        <p>{timeText}</p>
+                    </div>
+                )}
+                <div className="pt-4 px-4 overflow-hidden text-clip space-y-2">
+                    <p className="font-serif italic text-xl text-primary">{location}</p>
+                    {event.alamat && (
+                        <p className="text-sm text-muted-foreground max-w-sm mx-auto font-sans leading-relaxed">
+                            {event.alamat}
+                        </p>
+                    )}
                 </div>
             </div>
 

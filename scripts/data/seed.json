@@ -2,69 +2,94 @@
   "hero": {
     "heading": "The Wedding of",
     "names": "Sasti & Adam",
-    "date": "17.07.26",
-    "image": "/assets/two.jpeg",
+    "date": "18.07.26",
+    "image": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_11-G6NOliOWe4t0IykfU0oVkH2ZrpHosi.jpg",
     "quote": {
       "arabic": "وَمِن كُلِّ شَيْءٍ خَلَقْنَا زَوْجَيْنِ لَعَلَّكُمْ تَذَكَّرُونَ",
       "translation": "Dan segala sesuatu Kami ciptakan berpasang-pasangan agar kamu mengingat (kebesaran Allah).",
       "source": "QS. Az-Zariyat: 49"
     }
   },
+  "overlay": {
+    "backgroundImage": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_12-enZMzNaO5rAPFhuJQNni5J1Q24pMrI.jpg"
+  },
   "mempelai": {
     "pria": {
       "namaLengkap": "Ibnu Adam",
-      "putraDari": "Bpk. M & Ibu S",
-      "fotoUrl": "/assets/groom.jpeg"
+      "putraDari": "Bpk. Mubasir & Ibu Suryati",
+      "fotoUrl": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_13-La2tiSgDBTMjPFc4hDkMiPPxRcT8Oz.jpg",
+      "putraKe": "Putra ketiga",
+      "asal": "Purbalingga"
     },
     "wanita": {
       "namaLengkap": "Sasti Virgine Javanti",
-      "putriDari": "Bpk. S & Ibu N",
-      "fotoUrl": "/assets/bride.jpeg"
+      "putriDari": "Bpk. Sutardi & Ibu Nurbainingsih",
+      "fotoUrl": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti-owR1EDtHE4ZvUrIQDr1oUqPHPPgoGV.jpg",
+      "putriKe": "Putri keempat",
+      "asal": "Pemalang"
     }
   },
   "acara": [
     {
+      "title": "Tasyakuran",
+      "tanggal": "2026-07-16T10:00:00.000Z",
+      "tanggalEnd": "2026-07-17T10:00:00.000Z",
+      "jam": "10:00",
+      "showJam": false,
+      "sampaiSelesai": false,
+      "tempat": "Rumah Mempelai Pria",
+      "alamat": "Dusun Krajan, Desa Karangreja RT 01/RW 02, Kec. Karangreja, Purbalingga",
+      "maps": "https://maps.app.goo.gl/8Z3FRMTcsaUDHrQSA",
+      "enabled": true
+    },
+    {
       "title": "Akad Nikah",
-      "tanggal": "2026-07-17T09:00:00.000Z",
+      "tanggal": "2026-07-18T09:00:00.000Z",
       "jam": "09:00 WIB",
+      "showJam": true,
+      "sampaiSelesai": true,
       "tempat": "Rumah Mempelai Wanita",
-      "maps": "https://maps.google.com/?q=Masjid+Al-Ikhlas",
+      "alamat": "Jl. Ahmad Yani No. 12, Kel. Kebondalem RT 03/RW 04, Pemalang",
+      "maps": "https://maps.app.goo.gl/PvUzG644uedT51pi9",
       "enabled": true
     },
     {
       "title": "Resepsi",
-      "tanggal": "2026-07-17T11:00:00.000Z",
+      "tanggal": "2026-07-18T11:00:00.000Z",
       "jam": "11:00 - 13:00 WIB",
+      "showJam": true,
+      "sampaiSelesai": false,
       "tempat": "Rumah Mempelai Wanita",
-      "maps": "https://maps.google.com/?q=Hotel+Indonesia",
+      "alamat": "Jl. Ahmad Yani No. 12, Kel. Kebondalem RT 03/RW 04, Pemalang",
+      "maps": "https://maps.app.goo.gl/PvUzG644uedT51pi9",
       "enabled": true
     }
   ],
   "weddingStory": [
-  {
-    "year": "2021",
-    "title": "First Meeting",
-    "content": "Atas izin Allah, kami dipertemukan untuk pertama kalinya sebagai bagian dari organisasi GENBI. Sebuah pertemuan sederhana yang menjadi awal dari rencana-Nya yang indah.",
-    "enabled": true
-  },
-  {
-    "year": "2021",
-    "title": "Menjalin Hubungan",
-    "content": "Dengan niat yang baik dan saling menjaga, kami memilih untuk saling mengenal lebih dalam, belajar tentang sabar, doa, dan komitmen.",
-    "enabled": true
-  },
-  {
-    "year": "2024",
-    "title": "Engagement",
-    "content": "Dengan memohon ridha Allah dan restu orang tua, kami mengikat janji dalam pertunangan sebagai langkah awal menuju pernikahan yang diridhai-Nya.",
-    "enabled": true
-  }
+    {
+      "year": "2021",
+      "title": "Pertemuan",
+      "content": "Adalah Jogja, kota tempat takdir mempertemukan kami; tatkala kami bernaung dalam organisasi kampus yang sama. Tiadalah kami duga, benih rasa perlahan bertumbuh di sela-sela kebersamaan yang kerap kami jalani bersama. Hingga kami memutuskan untuk memulai cerita bersama.",
+      "enabled": true
+    },
+    {
+      "year": "2024",
+      "title": "Pertunangan",
+      "content": "Seiring berlalunya waktu, serta jarak yang membatasi temu, kami pun memantapkan hati tanpa ragu. Maka, tepat di tanggal 29 Juni 2024 selepas tiga tahun bersama, kami mengikat kasih dalam janji pertunangan.",
+      "enabled": true
+    },
+    {
+      "year": "2026",
+      "title": "Pernikahan",
+      "content": "Adapun kini, selepas perjalanan panjang yang hampir genap lima tahun, kami hendak memulai kisah yang kekal adanya. Dua jiwa dipersatukan menjadi peneduh serta pondasi bagi sebuah rumah, tempat hati senantiasa pulang dan berlabuh. Maka pada 18 Juli 2026, kami mengikrarkan niat untuk melangsungkan pernikahan.",
+      "enabled": true
+    }
   ],
   "paymentMethods": [
     {
-      "bank": "BCA",
-      "number": "4561042386",
-      "holder": "Ibnu Adam",
+      "bank": "BNI",
+      "number": "1252067798",
+      "holder": "Sasti Virgine Javanti",
       "type": "bank",
       "enabled": true
     },
@@ -86,9 +111,26 @@
     {
       "name": "Admin",
       "message": "Welcome to our wedding website!",
-      "timestamp": "2024-12-01T10:00:00.000Z",
+      "timestamp": "2026-05-23T10:00:00.000Z",
       "isVisible": true,
       "isFavorite": true
     }
-  ]
+  ],
+  "gallery": [
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_11-G6NOliOWe4t0IykfU0oVkH2ZrpHosi.jpg",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_12-enZMzNaO5rAPFhuJQNni5J1Q24pMrI.jpg",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_3-deeb41p1uFUf5EEDJWEKYa0qGyOTqd.jpg",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_10-HIADybgejWvCrNK5MedYyD8FHYq1pE.jpg"
+  ],
+  "mediaLibrary": [
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_13-La2tiSgDBTMjPFc4hDkMiPPxRcT8Oz.jpg",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti-owR1EDtHE4ZvUrIQDr1oUqPHPPgoGV.jpg",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_11-G6NOliOWe4t0IykfU0oVkH2ZrpHosi.jpg",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_7-XVr0l7xtpmu4Ho1CHJposELIygTFlM.jpg",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_10-HIADybgejWvCrNK5MedYyD8FHYq1pE.jpg",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_12-enZMzNaO5rAPFhuJQNni5J1Q24pMrI.jpg",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_3-deeb41p1uFUf5EEDJWEKYa0qGyOTqd.jpg"
+  ],
+  "isLocked": false,
+  "password": "sastisayangadam"
 }

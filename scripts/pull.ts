@@ -27,6 +27,9 @@ async function pull() {
     // However, for seeding, having _id in subdocs usually doesn't hurt unless we want fresh ones.
     // Let's recursively remove _id.
     const removeIds = (obj: any): any => {
+        if (obj instanceof Date) {
+            return obj;
+        }
         if (Array.isArray(obj)) {
             return obj.map(removeIds);
         } else if (obj !== null && typeof obj === 'object') {
