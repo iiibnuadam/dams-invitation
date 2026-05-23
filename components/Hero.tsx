@@ -36,13 +36,13 @@ export default function Hero({ data, isOpened = false }: HeroProps) {
         className="relative z-10 flex flex-col items-center gap-6 w-full max-w-4xl"
       >
         <span className="uppercase tracking-[0.3em] text-xs md:text-sm text-muted-foreground mb-4">
-           <Highlighter action="underline" play={isOpened}>
+           <Highlighter action="underline" play={isOpened} color="#c59f59ff">
               {data.hero.heading}
            </Highlighter>
         </span>
 
         <h1 className="font-heading text-6xl md:text-8xl lg:text-9xl text-foreground leading-none">
-           <Highlighter action="highlight" play={isOpened}>
+           <Highlighter action="highlight" play={isOpened} color="#c59f59ff">
               {data.hero.names}
            </Highlighter>
         </h1>
