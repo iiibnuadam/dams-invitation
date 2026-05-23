@@ -83,7 +83,7 @@ export default function Hero({ data, isOpened = false }: HeroProps) {
 
         {/* Quote */}
         <div className="max-w-2xl space-y-4 px-4">
-          <p className="font-serif text-2xl md:text-4xl text-foreground/80 leading-relaxed" dir="rtl">
+          <p className="font-serif text-xl md:text-2xl text-foreground/80 leading-relaxed" dir="rtl">
             {data.hero.quote.arabic}
           </p>
           <div className="h-px w-12 bg-accent/50 mx-auto my-4" />
