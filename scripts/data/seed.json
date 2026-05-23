@@ -1,14 +1,14 @@
 {
   "hero": {
+    "heading": "The Wedding of",
+    "names": "Sasti & Adam",
+    "date": "18.07.26",
+    "image": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_11-G6NOliOWe4t0IykfU0oVkH2ZrpHosi.jpg",
     "quote": {
       "arabic": "وَمِن كُلِّ شَيْءٍ خَلَقْنَا زَوْجَيْنِ لَعَلَّكُمْ تَذَكَّرُونَ",
       "translation": "Dan segala sesuatu Kami ciptakan berpasang-pasangan agar kamu mengingat (kebesaran Allah).",
       "source": "QS. Az-Zariyat: 49"
-    },
-    "heading": "The Wedding of",
-    "names": "Sasti & Adam",
-    "date": "18.07.26",
-    "image": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_11-G6NOliOWe4t0IykfU0oVkH2ZrpHosi.jpg"
+    }
   },
   "overlay": {
     "backgroundImage": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_12-enZMzNaO5rAPFhuJQNni5J1Q24pMrI.jpg"
