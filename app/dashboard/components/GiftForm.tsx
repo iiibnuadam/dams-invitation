@@ -26,7 +26,7 @@ import { SortableItem } from "../SortableItem";
 import ImageUploadInput from "./ImageUploadInput";
 
 export default function GiftForm() {
-    const { control, register, watch } = useFormContext();
+    const { control, register, watch, setValue } = useFormContext();
     const { fields, append, remove, move } = useFieldArray({
       control,
       name: "paymentMethods"
@@ -55,7 +55,7 @@ export default function GiftForm() {
           <div>
             <CardTitle>Gift Methods (Data Gift)</CardTitle>
             <CardDescription>
-              Manage Bank Account, QRIS, or Gift Address.
+              Manage Bank Account, QRIS, or Gift Address. Custom background and text colors can be selected below.
             </CardDescription>
           </div>
           <Button
@@ -66,6 +66,8 @@ export default function GiftForm() {
                 holder: "",
                 type: "bank",
                 enabled: true,
+                bgColor: "#1A1A1A",
+                textColor: "#FFFFFF",
               })
             }
             size="sm"
@@ -124,88 +126,144 @@ export default function GiftForm() {
                       </div>
                     </div>
 
-                      <div className="space-y-4">
-                        <div className="space-y-2">
-                          <Label>Method Type</Label>
-                          <select
-                            {...register(`paymentMethods.${index}.type`)}
-                            className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                          >
-                            <option value="bank">Bank Transfer</option>
-                            <option value="qris">QRIS (QR Code)</option>
-                            <option value="address">Send Gift (Address)</option>
-                          </select>
-                        </div>
+                    <div className="space-y-4">
+                      <div className="space-y-2">
+                        <Label>Method Type</Label>
+                        <select
+                          {...register(`paymentMethods.${index}.type`)}
+                          className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          <option value="bank">Bank Transfer</option>
+                          <option value="qris">QRIS (QR Code)</option>
+                          <option value="address">Send Gift (Address)</option>
+                        </select>
+                      </div>
 
-                        {methodType === "address" ? (
-                          <>
-                            <div className="space-y-2">
-                              <Label>Recipient Label (e.g. Home, Office)</Label>
+                      {methodType === "address" ? (
+                        <>
+                          <div className="space-y-2">
+                            <Label>Recipient Label (e.g. Home, Office)</Label>
+                            <Input
+                              placeholder="Home"
+                              {...register(`paymentMethods.${index}.name`)}
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label>Full Address</Label>
+                            <Textarea
+                              placeholder="Jl. Example No. 123, City, Postal Code"
+                              {...register(`paymentMethods.${index}.address`)}
+                            />
+                          </div>
+                        </>
+                      ) : methodType === "qris" ? (
+                        <>
+                           <div className="space-y-2">
+                              <Label>QRIS / E-Wallet Name</Label>
                               <Input
-                                placeholder="Home"
-                                {...register(`paymentMethods.${index}.name`)}
+                                placeholder="GoPay / OVO / Dana / Mandiri QR"
+                                {...register(`paymentMethods.${index}.bank`)}
                               />
-                            </div>
-                            <div className="space-y-2">
-                              <Label>Full Address</Label>
-                              <Textarea
-                                placeholder="Jl. Example No. 123, City, Postal Code"
-                                {...register(`paymentMethods.${index}.address`)}
-                              />
-                            </div>
-                          </>
-                        ) : methodType === "qris" ? (
-                          <>
-                             <div className="space-y-2">
-                                <Label>QRIS / E-Wallet Name</Label>
-                                <Input
-                                  placeholder="GoPay / OVO / Dana / Mandiri QR"
-                                  {...register(`paymentMethods.${index}.bank`)}
-                                />
-                             </div>
-                             <div className="space-y-2">
-                                <Label>Account Name (Merchant)</Label>
-                                <Input
-                                  placeholder="a.n. Sasti & Adam"
-                                  {...register(`paymentMethods.${index}.holder`)}
-                                />
-                             </div>
-                             <div className="space-y-2">
-                                <Label>QR Code Image</Label>
-                                <ImageUploadInput 
-                                    name={`paymentMethods.${index}.image`}
-                                    label="Upload QR Code"
-                                />
-                             </div>
-                          </>
-                        ) : (
-                          <>
-                            <div className="grid grid-cols-2 gap-4">
-                              <div className="space-y-2">
-                                <Label>Bank Name</Label>
-                                <Input
-                                  placeholder="BCA / Mandiri"
-                                  {...register(`paymentMethods.${index}.bank`)}
-                                />
-                              </div>
-                              <div className="space-y-2">
-                                <Label>Account Number</Label>
-                                <Input
-                                  placeholder="1234567890"
-                                  {...register(`paymentMethods.${index}.number`)}
-                                />
-                              </div>
-                            </div>
-                            <div className="space-y-2">
-                              <Label>Account Holder</Label>
+                           </div>
+                           <div className="space-y-2">
+                              <Label>Account Name (Merchant)</Label>
                               <Input
-                                placeholder="Recipient Name"
+                                placeholder="a.n. Sasti & Adam"
                                 {...register(`paymentMethods.${index}.holder`)}
                               />
+                           </div>
+                           <div className="space-y-2">
+                              <Label>QR Code Image</Label>
+                              <ImageUploadInput 
+                                  name={`paymentMethods.${index}.image`}
+                                  label="Upload QR Code"
+                              />
+                           </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                              <Label>Bank Name</Label>
+                              <Input
+                                placeholder="BCA / Mandiri"
+                                {...register(`paymentMethods.${index}.bank`)}
+                              />
                             </div>
-                          </>
-                        )}
+                            <div className="space-y-2">
+                              <Label>Account Number</Label>
+                              <Input
+                                placeholder="1234567890"
+                                {...register(`paymentMethods.${index}.number`)}
+                              />
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <Label>Account Holder</Label>
+                            <Input
+                              placeholder="Recipient Name"
+                              {...register(`paymentMethods.${index}.holder`)}
+                            />
+                          </div>
+                        </>
+                      )}
+
+                      {/* Custom Appearance Style Section */}
+                      <div className="space-y-3 border-t pt-4 mt-2">
+                        <Label className="text-xs font-semibold">Custom Appearance (Warna Kartu)</Label>
+                        
+                        {/* Curated Premium Color Presets */}
+                        <div className="flex flex-wrap gap-2">
+                          {[
+                            { name: "Midnight Slate", bg: "#1A1A1A", text: "#FFFFFF" },
+                            { name: "Soft Pearl", bg: "#FFFFFF", text: "#1A1A1A" },
+                            { name: "Champagne Gold", bg: "#FAF6EE", text: "#C5A059" },
+                            { name: "Emerald Forest", bg: "#1E352F", text: "#EBE3D5" },
+                            { name: "Midnight Navy", bg: "#141E30", text: "#E0E0E0" },
+                          ].map((preset) => (
+                            <button
+                              key={preset.name}
+                              type="button"
+                              onClick={() => {
+                                setValue(`paymentMethods.${index}.bgColor`, preset.bg, { shouldDirty: true });
+                                setValue(`paymentMethods.${index}.textColor`, preset.text, { shouldDirty: true });
+                              }}
+                              className="px-2.5 py-1 text-[11px] rounded border flex items-center gap-1.5 hover:bg-muted transition-colors cursor-pointer select-none bg-background"
+                            >
+                              <span 
+                                className="w-3.5 h-3.5 rounded-full border border-black/10 inline-block flex-shrink-0" 
+                                style={{ backgroundColor: preset.bg }}
+                              />
+                              <span>{preset.name}</span>
+                            </button>
+                          ))}
+                        </div>
+
+                        {/* Hex Inputs */}
+                        <div className="grid grid-cols-2 gap-4 pt-1">
+                          <div className="space-y-1">
+                            <Label className="text-[10px] text-muted-foreground">Background Color (Hex)</Label>
+                            <div className="flex gap-2">
+                              <Input
+                                placeholder="#1A1A1A"
+                                className="h-8 text-xs font-mono"
+                                {...register(`paymentMethods.${index}.bgColor`)}
+                              />
+                            </div>
+                          </div>
+                          <div className="space-y-1">
+                            <Label className="text-[10px] text-muted-foreground">Text Color (Hex)</Label>
+                            <div className="flex gap-2">
+                              <Input
+                                placeholder="#FFFFFF"
+                                className="h-8 text-xs font-mono"
+                                {...register(`paymentMethods.${index}.textColor`)}
+                              />
+                            </div>
+                          </div>
+                        </div>
                       </div>
+                    </div>
                   </div>
                 </SortableItem>
               );

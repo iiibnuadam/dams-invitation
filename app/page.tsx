@@ -75,7 +75,7 @@ export default function Home() {
         <Story data={data} />
       {/* Gallery */}
       {data.gallery && data.gallery.length > 0 && (
-        <GallerySection images={data.gallery} />
+        <GallerySection images={data.gallery} showPopup={data.showGalleryPopup !== false} />
       )}
       
       <Gift data={data} />

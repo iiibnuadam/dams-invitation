@@ -32,10 +32,23 @@ export async function PUT(request: Request) {
     await dbConnect();
     const data = await request.json();
     
-    // Single mode: always update "main"
-    // We strip slug from input if present, though it doesn't matter as we query by "main"
-    const { slug: _ignore, ...updateData } = data;
+    // Strip slug, _id, and __v to prevent immutable field errors
+    const { slug: _ignore, _id: _ignoreId, __v: _ignoreV, ...updateData } = data;
     const slug = "main";
+
+    // Sanitize empty string date fields to prevent Mongoose CastErrors
+    if (updateData.acara && Array.isArray(updateData.acara)) {
+      updateData.acara = updateData.acara.map((event: any) => {
+        const cleaned = { ...event };
+        if (cleaned.tanggalEnd === "" || cleaned.tanggalEnd === null) {
+          delete cleaned.tanggalEnd;
+        }
+        if (cleaned.tanggal === "" || cleaned.tanggal === null) {
+          delete cleaned.tanggal;
+        }
+        return cleaned;
+      });
+    }
 
     const invitation = await Invitation.findOneAndUpdate(
       { slug },

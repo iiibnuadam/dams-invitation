@@ -60,6 +60,8 @@ export interface IInvitation extends Document {
     image?: string; // For QRIS
     type: "bank" | "address" | "qris";
     enabled: boolean;
+    bgColor?: string;
+    textColor?: string;
   }[];
   comments: {
     name: string;
@@ -68,10 +70,11 @@ export interface IInvitation extends Document {
     isVisible: boolean;
     isFavorite: boolean;
   }[];
-  gallery: string[];
+  gallery: { url: string; focusY?: number; cols?: number; rows?: number }[];
   mediaLibrary: string[];
   isLocked: boolean;
   password?: string;
+  showGalleryPopup?: boolean;
 }
 
 const InvitationSchema: Schema = new Schema(
@@ -140,6 +143,8 @@ const InvitationSchema: Schema = new Schema(
         image: String,
         type: { type: String, enum: ["bank", "address", "qris"], required: true },
         enabled: { type: Boolean, default: true },
+        bgColor: String,
+        textColor: String,
       },
     ],
     comments: [
@@ -151,10 +156,18 @@ const InvitationSchema: Schema = new Schema(
         isFavorite: { type: Boolean, default: false },
       },
     ],
-    gallery: [String],
+    gallery: [
+      {
+        url: { type: String, required: true },
+        focusY: { type: Number, default: 50 },
+        cols: { type: Number, default: 1 },
+        rows: { type: Number, default: 1 }
+      }
+    ],
     mediaLibrary: [String],
     isLocked: { type: Boolean, default: false },
     password: { type: String },
+    showGalleryPopup: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

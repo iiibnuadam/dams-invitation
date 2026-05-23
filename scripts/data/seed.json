@@ -117,10 +117,30 @@
     }
   ],
   "gallery": [
-    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_11-G6NOliOWe4t0IykfU0oVkH2ZrpHosi.jpg",
-    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_12-enZMzNaO5rAPFhuJQNni5J1Q24pMrI.jpg",
-    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_3-deeb41p1uFUf5EEDJWEKYa0qGyOTqd.jpg",
-    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_10-HIADybgejWvCrNK5MedYyD8FHYq1pE.jpg"
+    {
+      "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_11-G6NOliOWe4t0IykfU0oVkH2ZrpHosi.jpg",
+      "focusY": 20,
+      "cols": 2,
+      "rows": 2
+    },
+    {
+      "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_12-enZMzNaO5rAPFhuJQNni5J1Q24pMrI.jpg",
+      "focusY": 50,
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_3-deeb41p1uFUf5EEDJWEKYa0qGyOTqd.jpg",
+      "focusY": 50,
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_10-HIADybgejWvCrNK5MedYyD8FHYq1pE.jpg",
+      "focusY": 20,
+      "cols": 2,
+      "rows": 1
+    }
   ],
   "mediaLibrary": [
     "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_13-La2tiSgDBTMjPFc4hDkMiPPxRcT8Oz.jpg",
@@ -132,5 +152,6 @@
     "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_3-deeb41p1uFUf5EEDJWEKYa0qGyOTqd.jpg"
   ],
   "isLocked": false,
-  "password": "sastisayangadam"
+  "password": "sastisayangadam",
+  "showGalleryPopup": true
 }

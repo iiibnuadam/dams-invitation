@@ -81,7 +81,9 @@ const invitationSchema = z.object({
       address: z.string().optional(),
       image: z.string().optional(),
       type: z.enum(["bank", "address", "qris"]),
-      enabled: z.boolean().default(true)
+      enabled: z.boolean().default(true),
+      bgColor: z.string().optional().nullable().or(z.literal("")),
+      textColor: z.string().optional().nullable().or(z.literal(""))
   })).optional(),
   comments: z.array(z.object({
       name: z.string(),
@@ -90,10 +92,16 @@ const invitationSchema = z.object({
       isVisible: z.boolean().default(true),
       isFavorite: z.boolean().default(false)
   })).optional(),
-  gallery: z.array(z.string()).optional(),
+  gallery: z.array(z.object({
+    url: z.string(),
+    focusY: z.number().min(0).max(100).default(50),
+    cols: z.number().min(1).max(3).default(1),
+    rows: z.number().min(1).max(2).default(1)
+  })).optional(),
   mediaLibrary: z.array(z.string()).optional(),
   isLocked: z.boolean().default(false).optional(),
-  password: z.string().optional()
+  password: z.string().optional(),
+  showGalleryPopup: z.boolean().default(true).optional()
 });
 
 type InvitationFormValues = z.infer<typeof invitationSchema>;
@@ -186,6 +194,11 @@ export default function DashboardPage() {
     } finally {
         setIsSaving(false);
     }
+  };
+
+  const onError = (errors: any) => {
+    console.error("Form validation errors:", errors);
+    toast.error("Format data tidak valid. Silakan periksa kembali input Anda.");
   };
 // ...
   const handleLogout = async () => {
@@ -281,7 +294,7 @@ export default function DashboardPage() {
         </div>
 
         <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col h-full overflow-hidden">
+            <form onSubmit={handleSubmit(onSubmit, onError)} className="flex flex-col h-full overflow-hidden">
                 {/* Header - Full Width */}
                 <div className="hidden md:flex items-center justify-between flex-shrink-0 bg-background/95 backdrop-blur border-b px-8 py-4 shadow-sm z-10">
                      <div className="flex flex-col gap-1">

@@ -104,43 +104,79 @@ function EventCard({ event, index }: { event: any, index: number }) {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay, duration: 0.6 }}
             viewport={{ once: true }}
-            className="w-full max-w-xl bg-white/50 backdrop-blur border border-border p-8 md:p-12 rounded-t-full rounded-b-lg text-center shadow-lg hover:shadow-xl transition-all"
+            className="w-full max-w-xl bg-white/60 dark:bg-black/40 backdrop-blur border border-border/80 p-8 md:p-12 rounded-t-full rounded-b-lg text-center shadow-lg hover:shadow-xl transition-all relative overflow-hidden group"
         >
-            <div className="mb-6">
-                <Icon icon="ph:heart-straight-light" className="text-4xl text-accent mx-auto mb-4" />
-                <h3 className="font-heading text-3xl mb-2">{title}</h3>
-                <div className="w-12 h-px bg-accent mx-auto" />
+            {/* Elegant Double Inner Border Frame */}
+            <div className="absolute inset-2 border border-accent/25 rounded-t-full rounded-b-md pointer-events-none z-10" />
+            <div className="absolute inset-[11px] border border-accent/10 rounded-t-full rounded-b-sm pointer-events-none z-10" />
+
+            {/* Subtle Floral Watermarks in Corners */}
+            <div className="absolute -bottom-8 -right-8 w-40 h-40 opacity-[0.06] dark:opacity-[0.15] pointer-events-none select-none z-0">
+                <img 
+                    src="/assets/floral-corner.png" 
+                    alt=""
+                    className="w-full h-full object-contain rotate-[-45deg] mix-blend-multiply dark:invert dark:mix-blend-screen" 
+                />
+            </div>
+            <div className="absolute -bottom-8 -left-8 w-40 h-40 opacity-[0.06] dark:opacity-[0.15] pointer-events-none select-none z-0 scale-x-[-1]">
+                <img 
+                    src="/assets/floral-corner.png" 
+                    alt=""
+                    className="w-full h-full object-contain rotate-[-45deg] mix-blend-multiply dark:invert dark:mix-blend-screen" 
+                />
             </div>
 
-            <div className="space-y-4 mb-8">
-                <div>
-                    <p className="font-serif text-lg font-medium leading-relaxed">
-                        {formatEventDate(event.tanggal, event.tanggalEnd)}
-                    </p>
-                </div>
-                {timeText && (
-                    <div className="text-muted-foreground font-sans">
-                        <p>{timeText}</p>
+            {/* Content Container (Needs higher z-index to stay above background watermarks) */}
+            <div className="relative z-20 space-y-6">
+                <div className="space-y-3">
+                    {/* Header Ornament */}
+                    <div className="flex items-center justify-center gap-3">
+                        <div className="h-px w-6 bg-accent/30 group-hover:w-10 transition-all duration-500" />
+                        <Icon icon="ph:flower-lotus-light" className="text-3xl text-accent" />
+                        <div className="h-px w-6 bg-accent/30 group-hover:w-10 transition-all duration-500" />
                     </div>
-                )}
-                <div className="pt-4 px-4 overflow-hidden text-clip space-y-2">
-                    <p className="font-serif italic text-xl text-primary">{location}</p>
-                    {event.alamat && (
-                        <p className="text-sm text-muted-foreground max-w-sm mx-auto font-sans leading-relaxed">
-                            {event.alamat}
-                        </p>
-                    )}
+                    <h3 className="font-heading text-3xl md:text-4xl text-primary">{title}</h3>
+                    {/* Divider Ornament */}
+                    <div className="flex items-center justify-center gap-2">
+                        <div className="w-6 h-px bg-accent/30" />
+                        <div className="w-1.5 h-1.5 rotate-45 bg-accent" />
+                        <div className="w-6 h-px bg-accent/30" />
+                    </div>
                 </div>
-            </div>
 
-            <Button 
-                variant="outline" 
-                className="rounded-full gap-2 hover:bg-primary hover:text-white transition-colors"
-                onClick={() => window.open(mapsLink, '_blank')}
-            >
-                <Icon icon="ph:map-pin-light" className="text-lg" />
-                View Location
-            </Button>
+                <div className="space-y-4 mb-2">
+                    <div>
+                        <p className="font-serif text-lg font-medium text-primary/95 leading-relaxed">
+                            {formatEventDate(event.tanggal, event.tanggalEnd)}
+                        </p>
+                    </div>
+                    {timeText && (
+                        <div className="text-muted-foreground font-sans text-sm tracking-wide">
+                            <p className="inline-flex items-center justify-center gap-1.5 mx-auto">
+                                <Icon icon="ph:clock-light" className="text-accent text-base" />
+                                {timeText}
+                            </p>
+                        </div>
+                    )}
+                    <div className="pt-4 px-4 overflow-hidden text-clip space-y-2">
+                        <p className="font-serif italic text-xl text-primary">{location}</p>
+                        {event.alamat && (
+                            <p className="text-sm text-muted-foreground max-w-sm mx-auto font-sans leading-relaxed">
+                                {event.alamat}
+                            </p>
+                        )}
+                    </div>
+                </div>
+
+                <Button 
+                    variant="outline" 
+                    className="rounded-full gap-2 hover:bg-primary hover:text-white transition-colors border-accent/40 text-primary hover:border-primary font-sans text-xs uppercase tracking-wider h-10 px-6 shadow-sm"
+                    onClick={() => window.open(mapsLink, '_blank')}
+                >
+                    <Icon icon="ph:map-pin-light" className="text-base" />
+                    View Location
+                </Button>
+            </div>
         </motion.div>
     )
 }
