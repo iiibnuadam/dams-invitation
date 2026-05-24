@@ -100,7 +100,7 @@ export default function Overlay({ onOpen, data }: OverlayProps) {
           transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
           className={cn(
             "fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden p-4 select-none",
-            hasBgImage ? "bg-[#1A1A1A] text-white" : "bg-[#F9F9F9] text-[#1A1A1A]"
+            hasBgImage ? "bg-white text-white" : "bg-white text-[#1A1A1A]"
           )}
         >
             {/* Background Image with Ken Burns animation */}
