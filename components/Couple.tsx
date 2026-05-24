@@ -54,7 +54,7 @@ export default function Couple({ data }: CoupleProps) {
             >
 
 
-                <div className="relative w-64 h-80 flex items-center justify-center">
+                <div className="relative w-64 h-80 flex items-center justify-center mb-12">
                    <FloralOrnament 
                         position="bottom-left" 
                         className="-bottom-6 md:-bottom-12 -left-6 md:-left-12 w-48 h-48 opacity-30 rotate-[-15deg] z-20"
@@ -101,9 +101,6 @@ export default function Couple({ data }: CoupleProps) {
                         </p>
                     )}
                 </div>
-                <div className="flex gap-4 text-muted-foreground">
-                    <Icon icon="ph:instagram-logo-light" className="text-xl hover:text-accent transition-colors cursor-pointer" />
-                </div>
             </motion.div>
 
              {/* Groom */}
@@ -114,7 +111,7 @@ export default function Couple({ data }: CoupleProps) {
                 viewport={{ once: true }}
                 className="flex flex-col items-center text-center space-y-6 md:mt-24" // Offset for layout interest
             >
-                <div className="relative w-64 h-80 flex items-center justify-center">
+                <div className="relative w-64 h-80 flex items-center justify-center mb-12">
                     <FloralOrnament 
                         position="top-right" 
                         className="-top-6 md:-top-12 -right-6 md:-right-12 w-48 h-48 opacity-30 rotate-[15deg] z-20"
@@ -157,9 +154,6 @@ export default function Couple({ data }: CoupleProps) {
                             {data.mempelai.pria.asal}
                         </p>
                     )}
-                </div>
-                <div className="flex gap-4 text-muted-foreground">
-                    <Icon icon="ph:instagram-logo-light" className="text-xl hover:text-accent transition-colors cursor-pointer" />
                 </div>
             </motion.div>
 
