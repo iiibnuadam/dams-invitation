@@ -13,6 +13,7 @@ interface HeroProps {
       names: string;
       date: string;
       image?: string;
+      showArabicQuote?: boolean;
       quote: {
         arabic: string;
         translation: string;
@@ -86,10 +87,14 @@ export default function Hero({ data, isOpened = false }: HeroProps) {
 
         {/* Quote */}
         <div className="max-w-2xl space-y-4 px-4">
-          <p className="font-serif text-xl md:text-2xl text-foreground/80 leading-relaxed" dir="rtl">
-            {data.hero.quote.arabic}
-          </p>
-          <div className="h-px w-12 bg-accent/50 mx-auto my-4" />
+          {data.hero.showArabicQuote !== false && data.hero.quote.arabic && (
+            <>
+              <p className="font-serif text-xl md:text-2xl text-foreground/80 leading-relaxed" dir="rtl">
+                {data.hero.quote.arabic}
+              </p>
+              <div className="h-px w-12 bg-accent/50 mx-auto my-2" />
+            </>
+          )}
           <p className="text-sm md:text-base italic text-muted-foreground font-light">
             "{data.hero.quote.translation}"
           </p>

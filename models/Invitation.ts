@@ -7,6 +7,7 @@ export interface IInvitation extends Document {
     names: string;
     date: string;
     image: string;
+    showArabicQuote?: boolean;
     quote: {
       arabic: string;
       translation: string;
@@ -87,6 +88,7 @@ const InvitationSchema: Schema = new Schema(
       names: { type: String, required: true },
       date: { type: String, required: true },
       image: { type: String },
+      showArabicQuote: { type: Boolean, default: true },
       quote: {
         arabic: String,
         translation: String,

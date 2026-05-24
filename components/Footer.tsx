@@ -51,7 +51,10 @@ export default function Footer({ data }: FooterProps) {
         >
           <p className="text-xs uppercase tracking-[0.25em] text-accent font-semibold">Terima Kasih</p>
           <p className="text-white/60 font-serif italic text-sm md:text-base leading-relaxed">
-             "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai."
+             "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kami."
+          </p>
+          <p className="text-white/60 font-serif italic text-sm md:text-base leading-relaxed">
+            Wassalamu'alaikum Warahmatullahi Wabarakatuh
           </p>
         </motion.div>
 

@@ -129,7 +129,7 @@ export default function Story({ data }: StoryProps) {
             <div className="w-8 h-px bg-accent/40" />
           </div>
           <h2 className="font-heading text-4xl md:text-5xl text-primary">Our Love Story</h2>
-          <p className="font-serif italic text-muted-foreground/80 mt-2 text-sm">Bagaimana kisah kasih kami bersemi dan bertumbuh</p>
+          <p className="font-serif italic text-muted-foreground/80 mt-2 text-sm">"Sebuah kisah cinta yang dimulai dari pertemuan tak sengaja"</p>
         </motion.div>
 
         {activeStories.length > 0 && (

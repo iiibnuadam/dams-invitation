@@ -39,7 +39,9 @@ export default function Couple({ data }: CoupleProps) {
             <h2 className="font-heading text-4xl md:text-5xl text-primary">The Happy Couple</h2>
             <div className="w-16 h-px bg-accent mx-auto" />
             <p className="text-muted-foreground italic font-serif">
-                "And of His signs is that He created for you from yourselves mates..."
+                Assalamu'alaikum Warahmatullahi Wabarakatuh,
+                <br />
+                Dengan segenap cinta dan kebahagiaan, kami mengundang Anda untuk hadir menjadi bagian dari hari istimewa kami.
             </p>
         </motion.div>
 

@@ -29,6 +29,7 @@ const invitationSchema = z.object({
     names: z.string(),
     date: z.string(),
     image: z.string().optional(),
+    showArabicQuote: z.boolean().default(true).optional(),
     quote: z.object({
         arabic: z.string(),
         translation: z.string(),

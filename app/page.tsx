@@ -14,6 +14,7 @@ import Footer from "@/components/Footer";
 import MusicPlayer from "@/components/MusicPlayer";
 import StickyHeader from "@/components/StickyHeader";
 import LoadingScreen from "@/components/LoadingScreen";
+import SidebarNav from "@/components/SidebarNav";
 
 export default function Home() {
   const [data, setData] = useState<any>(null);
@@ -68,19 +69,39 @@ export default function Home() {
           However, to prevent scroll, we handled that in Overlay.
       */}
       <div>
-        <Hero data={data} isOpened={isOpened} />
-        <Countdown targetDate={data.acara.find((e: any) => e.title.includes("Akad"))?.tanggal || data.acara[0]?.tanggal} />
-        <Couple data={data} />
-        <Events data={data} />
-        <Story data={data} />
-      {/* Gallery */}
-      {data.gallery && data.gallery.length > 0 && (
-        <GallerySection images={data.gallery} showPopup={data.showGalleryPopup !== false} />
-      )}
-      
-      <Gift data={data} />
-        <Comments data={data} />
+        <div id="hero">
+          <Hero data={data} isOpened={isOpened} />
+          <Countdown targetDate={data.acara.find((e: any) => e.title.includes("Akad"))?.tanggal || data.acara[0]?.tanggal} />
+        </div>
+        
+        <div id="couple">
+          <Couple data={data} />
+        </div>
+        
+        <div id="events">
+          <Events data={data} />
+        </div>
+        
+        <div id="story">
+          <Story data={data} />
+        </div>
+        
+        {data.gallery && data.gallery.length > 0 && (
+          <div id="gallery">
+            <GallerySection images={data.gallery} showPopup={data.showGalleryPopup !== false} />
+          </div>
+        )}
+        
+        <div id="gift">
+          <Gift data={data} />
+        </div>
+        
+        <div id="comments">
+          <Comments data={data} />
+        </div>
+        
         <Footer data={data} />
+        
         <MusicPlayer 
           autoPlayTrigger={isOpened} 
           musicUrl={data.musicUrl} 
@@ -89,6 +110,8 @@ export default function Home() {
           coupleImage={data.hero?.image || data.mempelai?.wanita?.fotoUrl}
           isOpened={isOpened}
         />
+
+        <SidebarNav isOpened={isOpened} hasGallery={!!(data.gallery && data.gallery.length > 0)} />
       </div>
     </main>
   );
