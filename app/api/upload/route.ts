@@ -14,7 +14,17 @@ export async function POST(request: Request): Promise<NextResponse> {
         // if (!session) throw new Error('Unauthorized');
 
         return {
-          allowedContentTypes: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
+          allowedContentTypes: [
+            'image/jpeg', 
+            'image/png', 
+            'image/gif', 
+            'image/webp',
+            'audio/mpeg',
+            'audio/mp3',
+            'audio/wav',
+            'audio/ogg',
+            'audio/aac'
+          ],
           addRandomSuffix: true,
           tokenPayload: JSON.stringify({
             // optional, sent to your server on upload completion

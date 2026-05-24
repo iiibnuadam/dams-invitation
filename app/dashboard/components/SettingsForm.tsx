@@ -5,15 +5,13 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Lock, Unlock, User, Loader2, Music, Play, Pause, Link, Trash2 } from "lucide-react";
+import { Lock, Unlock, User, Loader2, Music, Play, Pause, Link, Trash2, Upload } from "lucide-react";
 import { toast } from "sonner";
+import { upload } from "@vercel/blob/client";
 
 const MUSIC_PRESETS = [
-  { name: "Default Local Music", url: "" },
-  { name: "Beautiful Piano Harmony", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
-  { name: "Warm Acoustic Guitar", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
-  { name: "Elegant Orchestral", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
-  { name: "Sweet Lofi Beats", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" },
+  { name: "Can't Help Falling in Love", url: "/assets/musics/cant-help-falling-in-love.mp3" },
+  { name: "1000x", url: "/assets/musics/1000x.mp3" },
 ];
 
 export default function SettingsForm() {
@@ -24,6 +22,42 @@ export default function SettingsForm() {
 
   // Custom Tracks State
   const [newTrack, setNewTrack] = useState({ name: "", url: "" });
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files || event.target.files.length === 0) {
+      return;
+    }
+
+    const file = event.target.files[0];
+    setIsUploading(true);
+
+    try {
+      const newBlob = await upload(file.name, file, {
+        access: 'public',
+        handleUploadUrl: '/api/upload',
+      });
+
+      // Clean file extension for name suggestion
+      const cleanName = file.name.replace(/\.[^/.]+$/, "");
+      
+      setNewTrack({
+        name: cleanName,
+        url: newBlob.url
+      });
+      
+      toast.success("Lagu berhasil diunggah ke storage!");
+    } catch (error) {
+      console.error("Upload failed", error);
+      toast.error("Gagal mengunggah file. Silakan cek konsol.");
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
+  };
 
   const addCustomTrack = () => {
     if (!newTrack.name.trim() || !newTrack.url.trim()) {
@@ -69,7 +103,7 @@ export default function SettingsForm() {
       previewAudioRef.current.addEventListener("play", () => setIsPreviewPlaying(true));
     }
 
-    const targetSrc = musicUrl || "/assets/music.mp3";
+    const targetSrc = musicUrl;
 
     if (isPreviewPlaying) {
       previewAudioRef.current.pause();
@@ -250,7 +284,7 @@ export default function SettingsForm() {
                         </Button>
                     </div>
                     <p className="text-[0.8rem] text-muted-foreground">
-                        Leave blank to use the default local track (<code>/assets/music.mp3</code>).
+                        Leave blank to use the default local track (<code>{musicUrl}</code>).
                     </p>
                 </div>
 
@@ -339,15 +373,44 @@ export default function SettingsForm() {
                                 />
                             </div>
                             <div className="space-y-1">
-                                <Label htmlFor="newTrackUrl" className="text-[10px] text-muted-foreground">URL Lagu (.mp3)</Label>
-                                <Input
-                                    id="newTrackUrl"
-                                    type="text"
-                                    placeholder="https://domain.com/lagu-anda.mp3"
-                                    value={newTrack.url}
-                                    onChange={(e) => setNewTrack({ ...newTrack, url: e.target.value })}
-                                    className="h-8 text-xs bg-background"
-                                />
+                                <Label htmlFor="newTrackUrl" className="text-[10px] text-muted-foreground flex justify-between items-center">
+                                    <span>URL Lagu (.mp3)</span>
+                                    <span className="text-[9px] text-[#C5A059] cursor-pointer hover:underline font-medium" onClick={() => fileInputRef.current?.click()}>
+                                        Atau Upload File
+                                    </span>
+                                </Label>
+                                <div className="flex gap-2">
+                                    <Input
+                                        id="newTrackUrl"
+                                        type="text"
+                                        placeholder="https://domain.com/lagu-anda.mp3"
+                                        value={newTrack.url}
+                                        onChange={(e) => setNewTrack({ ...newTrack, url: e.target.value })}
+                                        className="h-8 text-xs bg-background flex-1"
+                                    />
+                                    <input
+                                        type="file"
+                                        ref={fileInputRef}
+                                        onChange={handleFileUpload}
+                                        accept="audio/*"
+                                        className="hidden"
+                                    />
+                                    <Button
+                                        type="button"
+                                        size="sm"
+                                        variant="outline"
+                                        onClick={() => fileInputRef.current?.click()}
+                                        className="h-8 text-xs flex items-center gap-1.5 px-3 flex-shrink-0"
+                                        disabled={isUploading}
+                                    >
+                                        {isUploading ? (
+                                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                                        ) : (
+                                            <Upload className="w-3.5 h-3.5" />
+                                        )}
+                                        Upload
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                         <div className="flex justify-end pt-1">
