@@ -101,7 +101,12 @@ const invitationSchema = z.object({
   mediaLibrary: z.array(z.string()).optional(),
   isLocked: z.boolean().default(false).optional(),
   password: z.string().optional(),
-  showGalleryPopup: z.boolean().default(true).optional()
+  showGalleryPopup: z.boolean().default(true).optional(),
+  musicUrl: z.string().optional(),
+  musicTracks: z.array(z.object({
+    name: z.string(),
+    url: z.string()
+  })).optional()
 });
 
 type InvitationFormValues = z.infer<typeof invitationSchema>;

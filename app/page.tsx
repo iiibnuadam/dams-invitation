@@ -81,7 +81,7 @@ export default function Home() {
       <Gift data={data} />
         <Comments data={data} />
         <Footer data={data} />
-        <MusicPlayer autoPlayTrigger={isOpened} />
+        <MusicPlayer autoPlayTrigger={isOpened} musicUrl={data.musicUrl} />
       </div>
     </main>
   );

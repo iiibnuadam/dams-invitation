@@ -75,6 +75,8 @@ export interface IInvitation extends Document {
   isLocked: boolean;
   password?: string;
   showGalleryPopup?: boolean;
+  musicUrl?: string;
+  musicTracks?: { name: string; url: string }[];
 }
 
 const InvitationSchema: Schema = new Schema(
@@ -168,6 +170,8 @@ const InvitationSchema: Schema = new Schema(
     isLocked: { type: Boolean, default: false },
     password: { type: String },
     showGalleryPopup: { type: Boolean, default: true },
+    musicUrl: { type: String, default: "" },
+    musicTracks: { type: [{ name: String, url: String }], default: [] },
   },
   { timestamps: true }
 );

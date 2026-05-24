@@ -7,11 +7,25 @@ import { motion } from "framer-motion";
 
 interface MusicPlayerProps {
   autoPlayTrigger?: boolean;
+  musicUrl?: string;
 }
 
-export default function MusicPlayer({ autoPlayTrigger = false }: MusicPlayerProps) {
+export default function MusicPlayer({ autoPlayTrigger = false, musicUrl }: MusicPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const audioSrc = musicUrl || "/assets/music.mp3";
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.load();
+      if (isPlaying) {
+        audioRef.current.play().catch(error => {
+          console.log("Play on source change prevented:", error);
+        });
+      }
+    }
+  }, [audioSrc]);
 
   useEffect(() => {
     if (autoPlayTrigger && audioRef.current) {
@@ -34,16 +48,20 @@ export default function MusicPlayer({ autoPlayTrigger = false }: MusicPlayerProp
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
+        setIsPlaying(false);
       } else {
-        audioRef.current.play();
+        audioRef.current.play().then(() => {
+          setIsPlaying(true);
+        }).catch(error => {
+          console.log("Play failed:", error);
+        });
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
   return (
     <div className="fixed bottom-4 left-4 z-50 flex items-center justify-center">
-      <audio ref={audioRef} src="/assets/music.mp3" loop />
+      <audio ref={audioRef} src={audioSrc} loop />
       
       {/* Speaker Pulse Effect (Subtle) */}
       {isPlaying && (
