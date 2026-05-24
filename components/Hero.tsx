@@ -42,9 +42,7 @@ export default function Hero({ data, isOpened = false }: HeroProps) {
         </span>
 
         <h1 className="font-heading text-6xl md:text-8xl lg:text-9xl text-foreground leading-none">
-           <Highlighter action="highlight" play={isOpened} color="#c59f59ff">
-              {data.hero.names}
-           </Highlighter>
+          {data.hero.names}
         </h1>
 
         <div className="flex items-center gap-6 text-lg md:text-xl font-light text-muted-foreground my-2">
