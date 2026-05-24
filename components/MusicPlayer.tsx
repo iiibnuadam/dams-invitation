@@ -11,6 +11,7 @@ interface MusicPlayerProps {
   musicTracks?: { name: string; url: string }[];
   coupleNames?: string;
   coupleImage?: string;
+  isOpened?: boolean;
 }
 
 const MUSIC_PRESETS = [
