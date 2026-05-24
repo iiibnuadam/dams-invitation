@@ -42,7 +42,12 @@ export default function Hero({ data, isOpened = false }: HeroProps) {
         </span>
 
         <h1 className="font-heading text-6xl md:text-8xl lg:text-9xl text-foreground leading-none">
-          {data.hero.names}
+          {data.hero.names.split(" & ").map((name, i) => (
+            <span key={i}>
+              {i > 0 && <span className="font-serif italic text-accent font-light text-5xl md:text-7xl lg:text-8xl mx-4">&amp;</span>}
+              {name}
+            </span>
+          ))}
         </h1>
 
         <div className="flex items-center gap-6 text-lg md:text-xl font-light text-muted-foreground my-2">

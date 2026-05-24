@@ -49,8 +49,8 @@ export default function Footer({ data }: FooterProps) {
           transition={{ duration: 0.8, delay: 0.1 }}
           className="space-y-4 max-w-lg mx-auto"
         >
-          <p className="text-xs uppercase tracking-[0.25em] text-accent font-semibold">Sampai Jumpa di Hari Bahagia Kami</p>
-          <p className="text-muted-foreground font-serif italic text-sm md:text-base leading-relaxed">
+          <p className="text-xs uppercase tracking-[0.25em] text-accent font-semibold">Terima Kasih</p>
+          <p className="text-white/60 font-serif italic text-sm md:text-base leading-relaxed">
              "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai."
           </p>
         </motion.div>
@@ -64,7 +64,13 @@ export default function Footer({ data }: FooterProps) {
           className="mt-12 mb-6"
         >
           <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl text-accent font-light tracking-wide">
-            {data.hero.names}
+            {/* {data.hero.names} */}
+            {data.hero.names.split(" & ").map((name, i) => (
+              <span key={name}>
+                {i > 0 && <span className="font-serif italic text-white/60 font-light mx-4">&amp;</span>}
+                {name}
+              </span>
+            ))}
           </h2>
         </motion.div>
 
@@ -74,7 +80,7 @@ export default function Footer({ data }: FooterProps) {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="flex items-center gap-4 text-white/50 text-xs font-sans uppercase tracking-[0.35em] mb-12"
+          className="flex items-center gap-4 text-white/60 text-xs font-sans uppercase tracking-[0.35em] mb-12"
         >
           <div className="h-[1px] w-6 bg-white/20" />
           <span>{data.hero.date.split(".").join(" . ")}</span>
@@ -92,7 +98,7 @@ export default function Footer({ data }: FooterProps) {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="space-y-2"
         >
-          <p className="text-sm text-white/20 tracking-wider font-sans flex items-center justify-center gap-1">
+          <p className="text-sm text-white/60 tracking-wider font-sans flex items-center justify-center gap-1">
              Made with <Icon icon="ph:heart-fill" className="text-red-500/60 inline" />
           </p>
         </motion.div>
