@@ -36,12 +36,13 @@ export default function Couple({ data }: CoupleProps) {
             viewport={{ once: true }}
             className="text-center mb-16 space-y-4"
         >
-            <h2 className="font-heading text-4xl md:text-5xl text-primary">The Happy Couple</h2>
+            {/* <h2 className="font-heading text-4xl md:text-5xl text-primary">The Happy Couple</h2> */}
+            <img src="/assets/bismillah.png" className="w-70 md:w-120 mx-auto" alt="Title" />
             <div className="w-16 h-px bg-accent mx-auto" />
             <p className="text-muted-foreground italic font-serif">
                 Assalamu'alaikum Warahmatullahi Wabarakatuh,
                 <br />
-                Dengan segenap cinta dan kebahagiaan, kami mengundang Anda untuk hadir menjadi bagian dari hari istimewa kami.
+                Dengan segenap cinta dan kebahagiaan, serta memohon rahmat dan ridho Allah Subhanahu wa Ta’ala, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan menjadi bagian dari hari istimewa kami.
             </p>
         </motion.div>
 
@@ -94,7 +95,7 @@ export default function Couple({ data }: CoupleProps) {
                     <p className="text-sm uppercase tracking-wider text-muted-foreground">The Bride</p>
                     <div className="h-px w-8 bg-accent mx-auto my-2" />
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                        {data.mempelai.wanita.putriKe ? `${data.mempelai.wanita.putriKe} dari` : "Putri dari"} Bpk {data.mempelai.wanita.putriDari}
+                        {data.mempelai.wanita.putriKe ? `${data.mempelai.wanita.putriKe} dari` : "Putri dari"} {data.mempelai.wanita.putriDari}
                     </p>
                     {data.mempelai.wanita.asal && (
                         <p className="text-xs tracking-wider text-muted-foreground uppercase flex items-center justify-center gap-1 mt-1 font-sans">
@@ -148,7 +149,7 @@ export default function Couple({ data }: CoupleProps) {
                     <p className="text-sm uppercase tracking-wider text-muted-foreground">The Groom</p>
                     <div className="h-px w-8 bg-accent mx-auto my-2" />
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                        {data.mempelai.pria.putraKe ? `${data.mempelai.pria.putraKe} dari` : "Putra dari"} Bpk {data.mempelai.pria.putraDari}
+                        {data.mempelai.pria.putraKe ? `${data.mempelai.pria.putraKe} dari` : "Putra dari"} {data.mempelai.pria.putraDari}
                     </p>
                     {data.mempelai.pria.asal && (
                         <p className="text-xs tracking-wider text-muted-foreground uppercase flex items-center justify-center gap-1 mt-1 font-sans">
