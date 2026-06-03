@@ -76,7 +76,7 @@ const textVariants = {
 
 const yearVariants = {
   inactive: {
-    opacity: 0.3,
+    opacity: 0.1,
     scale: 0.95,
     color: "rgba(197, 160, 89, 0.06)",
     transition: { duration: 0.5 }
