@@ -3,12 +3,22 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
+import { usePathname } from "next/navigation";
 
 export default function LoveCursor() {
+  const pathname = usePathname();
+  const isDashboard = pathname?.startsWith("/dashboard") || pathname?.startsWith("/login");
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isPointer, setIsPointer] = useState(false);
 
   useEffect(() => {
+    if (isDashboard) {
+      document.body.style.cursor = "auto";
+      return;
+    } else {
+      document.body.style.cursor = "";
+    }
+
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
       
@@ -29,7 +39,11 @@ export default function LoveCursor() {
     return () => {
       window.removeEventListener("mousemove", updateMousePosition);
     };
-  }, []);
+  }, [isDashboard]);
+
+  if (isDashboard) {
+    return null;
+  }
 
   return (
     <motion.div

@@ -1,14 +1,15 @@
 {
   "hero": {
+    "quote": {
+      "arabic": "وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةًۗ اِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ ۝",
+      "translation": "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.",
+      "source": "QS. Ar-Rum: 21"
+    },
     "heading": "The Wedding of",
     "names": "Sasti & Adam",
     "date": "18.07.26",
     "image": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_11-G6NOliOWe4t0IykfU0oVkH2ZrpHosi.jpg",
-    "quote": {
-      "arabic":"وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةًۗ اِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ ۝",
-      "translation": "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.",
-      "source": "QS. Ar-Rum: 21"
-    }
+    "showArabicQuote": false
   },
   "overlay": {
     "backgroundImage": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_12-enZMzNaO5rAPFhuJQNni5J1Q24pMrI.jpg"
@@ -43,13 +44,13 @@
       "enabled": true
     },
     {
-      "title": "Akad Nikah",
+      "title": "Akad Nikah dan Respsi",
       "tanggal": "2026-07-18T09:00:00.000Z",
       "jam": "09:00 WIB",
       "showJam": true,
-      "sampaiSelesai": false,
+      "sampaiSelesai": true,
       "tempat": "Rumah Mempelai Wanita",
-      "alamat": "Jl. Ternate, Kaligelang, Kec. Taman, Pemalang",
+      "alamat": "Jl. Ternate No.48 Rt 03/06 Kaligelang, Taman, Pemalang",
       "maps": "https://maps.app.goo.gl/PvUzG644uedT51pi9",
       "enabled": true
     },
@@ -60,22 +61,22 @@
       "showJam": true,
       "sampaiSelesai": true,
       "tempat": "Rumah Mempelai Wanita",
-      "alamat": "Jl. Ternate, Kaligelang, Kec. Taman, Pemalang",
+      "alamat": "Jl. Ternate No.48 Rt 03/06 Kaligelang, Taman, Pemalang",
       "maps": "https://maps.app.goo.gl/PvUzG644uedT51pi9",
-      "enabled": true
+      "enabled": false
     }
   ],
   "weddingStory": [
     {
       "year": "2021",
       "title": "Pertemuan",
-      "content": "Adalah Jogja, kota tempat takdir mempertemukan kami; tatkala kami bernaung dalam organisasi kampus yang sama. Tiadalah kami duga, benih rasa perlahan bertumbuh di sela-sela kebersamaan yang kerap kami jalani bersama. Hingga kami memutuskan untuk memulai cerita bersama.",
+      "content": "Adalah Jogja, kota tempat takdir mempertemukan kami; tatkala kami bernaung dalam organisasi kampus yang sama. Tiadalah kami duga, benih rasa perlahan bertumbuh di sela-sela kebersamaan yang kerap kami jalani bersama. Hingga kami memutuskan untuk memulai cerita.",
       "enabled": true
     },
     {
       "year": "2024",
       "title": "Pertunangan",
-      "content": "Seiring berlalunya waktu, serta jarak yang membatasi temu, kami pun memantapkan hati tanpa ragu. Maka, tepat di tanggal 29 Juni 2024 selepas tiga tahun bersama, kami mengikat kasih dalam janji pertunangan.",
+      "content": "Seiring berlalunya waktu, serta jarak yang membatasi temu, kami pun memantapkan hati tanpa ragu. Maka, tepat selepas tiga tahun bersama, kami mengikat kasih dalam janji pertunangan.",
       "enabled": true
     },
     {
@@ -88,7 +89,7 @@
   "paymentMethods": [
     {
       "bank": "BNI",
-      "number": "1252067798",
+      "number": "738562676",
       "holder": "Sasti Virgine Javanti",
       "type": "bank",
       "enabled": true,
@@ -106,7 +107,7 @@
     },
     {
       "name": "Rumah Mempelai Wanita",
-      "address": "Jl. Ternate, Kaligelang, Kec. Taman, Pemalang",
+      "address": "Jl. Ternate No.48 Rt 03/06 Kaligelang, Taman, Pemalang (52361)",
       "type": "address",
       "enabled": true,
       "bgColor": "",
@@ -159,5 +160,7 @@
   ],
   "isLocked": false,
   "password": "sastisayangadam",
-  "showGalleryPopup": false
+  "showGalleryPopup": true,
+  "musicTracks": [],
+  "musicUrl": "/assets/musics/cant-help-falling-in-love.mp3"
 }
