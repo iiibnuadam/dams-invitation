@@ -45,6 +45,10 @@ export interface IInvitation extends Document {
     alamat?: string;
     maps: string;
     enabled: boolean;
+    schedules?: {
+      name: string;
+      jam: string;
+    }[];
   }[];
   weddingStory: {
     year: string;
@@ -127,6 +131,15 @@ const InvitationSchema: Schema = new Schema(
         alamat: { type: String },
         maps: { type: String, required: true },
         enabled: { type: Boolean, default: true },
+        schedules: {
+          type: [
+            {
+              name: String,
+              jam: String,
+            }
+          ],
+          default: []
+        },
       },
     ],
     weddingStory: [

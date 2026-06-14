@@ -66,7 +66,11 @@ const invitationSchema = z.object({
       tempat: z.string(),
       alamat: z.string().optional().nullable().or(z.literal("")),
       maps: z.string(),
-      enabled: z.boolean().default(true)
+      enabled: z.boolean().default(true),
+      schedules: z.array(z.object({
+          name: z.string(),
+          jam: z.string()
+      })).optional().nullable()
   })),
   weddingStory: z.array(z.object({
       year: z.string(),

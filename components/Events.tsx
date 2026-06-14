@@ -16,6 +16,10 @@ interface EventsProps {
       tempat: string;
       alamat?: string;
       maps: string;
+      schedules?: {
+        name: string;
+        jam: string;
+      }[];
     }[];
   };
 }
@@ -150,13 +154,27 @@ function EventCard({ event, index }: { event: any, index: number }) {
                             {formatEventDate(event.tanggal, event.tanggalEnd)}
                         </p>
                     </div>
-                    {timeText && (
-                        <div className="text-muted-foreground font-sans text-sm tracking-wide">
-                            <p className="inline-flex items-center justify-center gap-1.5 mx-auto">
-                                <Icon icon="ph:clock-light" className="text-accent text-base" />
-                                {timeText}
-                            </p>
+                    {event.schedules && event.schedules.length > 0 ? (
+                        <div className="py-2 max-w-xs mx-auto space-y-3">
+                            {event.schedules.map((schedule: any, sIdx: number) => (
+                                <div key={sIdx} className="flex flex-col items-center justify-center border-t border-accent/15 pt-3 first:border-0 first:pt-0">
+                                    <span className="font-heading text-xl text-accent tracking-wide">{schedule.name}</span>
+                                    <span className="inline-flex items-center gap-1.5 text-muted-foreground font-sans text-sm tracking-wide mt-1">
+                                        <Icon icon="ph:clock-light" className="text-accent text-base" />
+                                        {schedule.jam}
+                                    </span>
+                                </div>
+                            ))}
                         </div>
+                    ) : (
+                        timeText && (
+                            <div className="text-muted-foreground font-sans text-sm tracking-wide">
+                                <p className="inline-flex items-center justify-center gap-1.5 mx-auto">
+                                    <Icon icon="ph:clock-light" className="text-accent text-base" />
+                                    {timeText}
+                                </p>
+                            </div>
+                        )
                     )}
                     <div className="pt-4 px-4 overflow-hidden text-clip space-y-2">
                         <p className="font-serif italic text-xl text-primary">{location}</p>

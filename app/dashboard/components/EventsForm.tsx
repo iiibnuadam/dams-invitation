@@ -69,6 +69,7 @@ export default function EventsForm() {
                 tempat: "Venue",
                 maps: "#",
                 enabled: true,
+                schedules: [],
               })
             }
             size="sm"
@@ -292,6 +293,8 @@ export default function EventsForm() {
                     <Label>Maps URL</Label>
                     <Input {...register(`acara.${index}.maps`)} />
                   </div>
+
+                  <SchedulesFieldArray eventIndex={index} control={control} register={register} />
                 </div>
               </SortableItem>
             ))}
@@ -304,5 +307,59 @@ export default function EventsForm() {
         )}
       </CardContent>
     </Card>
+  );
+}
+
+function SchedulesFieldArray({ eventIndex, control, register }: { eventIndex: number; control: any; register: any }) {
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: `acara.${eventIndex}.schedules`
+  });
+
+  return (
+    <div className="space-y-3 border-t pt-4 mt-4">
+      <div className="flex items-center justify-between">
+        <Label className="text-sm font-semibold">Sub-Schedules (Rundown Waktu)</Label>
+        <Button
+          type="button"
+          onClick={() => append({ name: "", jam: "" })}
+          variant="outline"
+          className="h-7 px-2 text-xs"
+        >
+          <Plus className="mr-1 h-3.5 w-3.5" /> Add Time
+        </Button>
+      </div>
+      <p className="text-xs text-muted-foreground">
+        Add multiple event times inside this single card (e.g. Akad and Resepsi schedules).
+      </p>
+
+      {fields.map((item, subIndex) => (
+        <div key={item.id} className="flex gap-2 items-center">
+          <div className="flex-1 grid grid-cols-2 gap-2">
+            <div className="space-y-1">
+              <Input
+                placeholder="Name (e.g. Akad Nikah)"
+                {...register(`acara.${eventIndex}.schedules.${subIndex}.name` as const)}
+              />
+            </div>
+            <div className="space-y-1">
+              <Input
+                placeholder="Time (e.g. 08:00 - 10:00 WIB)"
+                {...register(`acara.${eventIndex}.schedules.${subIndex}.jam` as const)}
+              />
+            </div>
+          </div>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={() => remove(subIndex)}
+            className="text-destructive hover:text-destructive hover:bg-destructive/10 h-9 w-9 flex-shrink-0"
+          >
+            <Trash2 className="h-4 w-4" />
+          </Button>
+        </div>
+      ))}
+    </div>
   );
 }

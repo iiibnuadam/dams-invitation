@@ -8,24 +8,24 @@
     "heading": "The Wedding of",
     "names": "Sasti & Adam",
     "date": "18.07.26",
-    "image": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_11-G6NOliOWe4t0IykfU0oVkH2ZrpHosi.jpg",
+    "image": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_updated_4-MXcLzNuWrw8CvBsL3bDI8mrUz1QmtG.JPG",
     "showArabicQuote": false
   },
   "overlay": {
-    "backgroundImage": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_12-enZMzNaO5rAPFhuJQNni5J1Q24pMrI.jpg"
+    "backgroundImage": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_updated_3-gwkVi2PKZ88KOXrEfq9jCdIXBRtm3Z.JPG"
   },
   "mempelai": {
     "pria": {
       "namaLengkap": "Ibnu Adam",
       "putraDari": "Bpk. Mubasir & Ibu Suryati",
-      "fotoUrl": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_13-La2tiSgDBTMjPFc4hDkMiPPxRcT8Oz.jpg",
+      "fotoUrl": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_updated_6-HX4nR3AQfLkE2HJ7V0LhA2BV6BS5vM.JPG",
       "putraKe": "Putra ketiga",
       "asal": "Purbalingga"
     },
     "wanita": {
       "namaLengkap": "Sasti Virgine Javanti",
       "putriDari": "Bpk. Sutardi & Ibu Nurbainingsih",
-      "fotoUrl": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti-owR1EDtHE4ZvUrIQDr1oUqPHPPgoGV.jpg",
+      "fotoUrl": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_updated_5-B7uSxLblMa86VrEIj0t6xsU77dH2ZT.JPG",
       "putriKe": "Putri keempat",
       "asal": "Pemalang"
     }
@@ -41,18 +41,29 @@
       "tempat": "Rumah Mempelai Pria",
       "alamat": "Jl. Sekar Dahlia No 29, Perumahan Griya Abdi Kencana, Purbalingga",
       "maps": "https://maps.app.goo.gl/8Z3FRMTcsaUDHrQSA",
-      "enabled": true
+      "enabled": true,
+      "schedules": []
     },
     {
-      "title": "Akad Nikah dan Respsi",
+      "title": "Akad Nikah dan Resepsi",
       "tanggal": "2026-07-18T09:00:00.000Z",
-      "jam": "09:00 WIB",
+      "jam": "08:00 WIB",
       "showJam": true,
       "sampaiSelesai": true,
       "tempat": "Rumah Mempelai Wanita",
       "alamat": "Jl. Ternate No.48 Rt 03/06 Kaligelang, Taman, Pemalang",
       "maps": "https://maps.app.goo.gl/PvUzG644uedT51pi9",
-      "enabled": true
+      "enabled": true,
+      "schedules": [
+        {
+          "name": "Akad Nikah",
+          "jam": "08:00 - 10:00 WIB"
+        },
+        {
+          "name": "Resepsi Pernikahan",
+          "jam": "11:00 WIB - Selesai"
+        }
+      ]
     },
     {
       "title": "Resepsi",
@@ -63,7 +74,8 @@
       "tempat": "Rumah Mempelai Wanita",
       "alamat": "Jl. Ternate No.48 Rt 03/06 Kaligelang, Taman, Pemalang",
       "maps": "https://maps.app.goo.gl/PvUzG644uedT51pi9",
-      "enabled": false
+      "enabled": false,
+      "schedules": []
     }
   ],
   "weddingStory": [
@@ -93,8 +105,8 @@
       "holder": "Sasti Virgine Javanti",
       "type": "bank",
       "enabled": true,
-      "bgColor": "#1E352F",
-      "textColor": "#EBE3D5"
+      "bgColor": "#FAF6EE",
+      "textColor": "#C5A059"
     },
     {
       "bank": "Mandiri",
@@ -106,7 +118,7 @@
       "textColor": "#E0E0E0"
     },
     {
-      "name": "Rumah Mempelai Wanita",
+      "name": "Rumah Sasti Virgine Javanti",
       "address": "Jl. Ternate No.48 Rt 03/06 Kaligelang, Taman, Pemalang (52361)",
       "type": "address",
       "enabled": true,
@@ -125,38 +137,45 @@
   ],
   "gallery": [
     {
-      "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_11-G6NOliOWe4t0IykfU0oVkH2ZrpHosi.jpg",
-      "focusY": 20,
+      "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_updated_4-MXcLzNuWrw8CvBsL3bDI8mrUz1QmtG.JPG",
+      "focusY": 50,
       "cols": 1,
       "rows": 2
     },
     {
-      "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_3-deeb41p1uFUf5EEDJWEKYa0qGyOTqd.jpg",
-      "focusY": 39,
+      "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_updated_2-lH9huQez1vZKDscwhaKXZcGvDfwHBH.JPG",
+      "focusY": 50,
       "cols": 1,
       "rows": 1
     },
     {
-      "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_12-enZMzNaO5rAPFhuJQNni5J1Q24pMrI.jpg",
-      "focusY": 36,
+      "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_updated_3-gwkVi2PKZ88KOXrEfq9jCdIXBRtm3Z.JPG",
+      "focusY": 50,
       "cols": 1,
       "rows": 2
     },
     {
-      "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_10-HIADybgejWvCrNK5MedYyD8FHYq1pE.jpg",
+      "url": "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_updated_7-rQYuVaeQ9pgreiDmC3KG9rJWGIzxGa.JPG",
       "focusY": 50,
       "cols": 1,
       "rows": 1
     }
   ],
   "mediaLibrary": [
-    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_13-La2tiSgDBTMjPFc4hDkMiPPxRcT8Oz.jpg",
-    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti-owR1EDtHE4ZvUrIQDr1oUqPHPPgoGV.jpg",
-    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_11-G6NOliOWe4t0IykfU0oVkH2ZrpHosi.jpg",
-    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_7-XVr0l7xtpmu4Ho1CHJposELIygTFlM.jpg",
-    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_10-HIADybgejWvCrNK5MedYyD8FHYq1pE.jpg",
-    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_12-enZMzNaO5rAPFhuJQNni5J1Q24pMrI.jpg",
-    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sisti_3-deeb41p1uFUf5EEDJWEKYa0qGyOTqd.jpg"
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_edited_1-kLFQEvbxxERZZUoMNvq0LUA8NZ4lPe.JPG",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_edited_3-BLhPvYJYb0MMWX9Os5YWUYSHI9SVd3.JPG",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_edited_4-6ZoWXyBKdM5NNPkZhQNAg75OhPCatN.JPG",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_edited_6-Qh1iOFLTmXuBRozG5NxcQILRu6PpOb.JPG",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_edited_7-CQbT71nrROhOxmDXPbYaNGgqS16rQO.JPG",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_edited_9-i8UWrK9KEydL1fBukwCyWJOHKzlQpq.JPG",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_edited_10-7dja269bkTNTkd4k79roLoO1CWQYLo.JPG",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_updated_1-8dIrAxrfQakbvZmzffO3NabNqy7v6d.JPG",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_updated_2-lH9huQez1vZKDscwhaKXZcGvDfwHBH.JPG",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_updated_3-gwkVi2PKZ88KOXrEfq9jCdIXBRtm3Z.JPG",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_updated_4-MXcLzNuWrw8CvBsL3bDI8mrUz1QmtG.JPG",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_updated_5-B7uSxLblMa86VrEIj0t6xsU77dH2ZT.JPG",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_updated_6-HX4nR3AQfLkE2HJ7V0LhA2BV6BS5vM.JPG",
+    "https://rtrzwy37xngzvwdz.public.blob.vercel-storage.com/sasti_updated_7-rQYuVaeQ9pgreiDmC3KG9rJWGIzxGa.JPG"
   ],
   "isLocked": false,
   "password": "sastisayangadam",
