@@ -48,14 +48,9 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-accent selection:text-white relative">
-      {/* Mega Mendung Background Overlay */}
+      {/* Wedding Stage Backdrop Background Overlay */}
       <div 
-        className="fixed inset-0 z-10 opacity-[0.05] pointer-events-none"
-        style={{
-          backgroundImage: "url('/patterns/megamendung.png')",
-          backgroundRepeat: "repeat",
-          backgroundSize: "400px",
-        }}
+        className="fixed inset-0 z-0 opacity-[0.22] md:opacity-[0.16] pointer-events-none bg-cover bg-center bg-no-repeat bg-[url('/patterns/bg-mobile.webp')] md:bg-[url('/patterns/bg-desktop.png')]"
       />
       
       <Overlay onOpen={() => setIsOpened(true)} data={data} />

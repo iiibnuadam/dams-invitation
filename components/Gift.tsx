@@ -37,7 +37,7 @@ export default function Gift({ data }: GiftProps) {
   if (activeMethods.length === 0) return null;
 
   return (
-    <section className="py-20 md:py-32 px-6 bg-[#F9F9F9] relative overflow-hidden">
+    <section className="py-20 md:py-32 px-6 bg-transparent relative overflow-hidden">
       {/* Background Ornaments */}
       <div className="absolute top-0 left-0 w-80 h-80 bg-accent/3 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2" />
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-accent/3 rounded-full blur-3xl translate-y-1/2 translate-x-1/2" />

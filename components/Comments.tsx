@@ -167,7 +167,7 @@ export default function Comments({ data }: CommentsProps) {
   }, [comments]);
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-gradient-to-b from-[#F9F9F9] to-white relative overflow-hidden">
+    <section className="py-24 md:py-32 px-6 bg-transparent relative overflow-hidden">
       {/* Background Ornamentations */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-accent/2 rounded-full blur-3xl opacity-50" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/2 rounded-full blur-3xl opacity-50" />

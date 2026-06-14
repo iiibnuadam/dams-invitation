@@ -21,7 +21,7 @@ export default function GallerySection({ images, showPopup = true }: GallerySect
   if (!images || images.length === 0) return null;
 
   return (
-    <section className="py-20 md:py-32 px-6 bg-background relative overflow-hidden">
+    <section className="py-20 md:py-32 px-6 bg-transparent relative overflow-hidden">
       {/* Decorative radial gradients */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />

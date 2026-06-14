@@ -28,7 +28,7 @@ interface CoupleProps {
 
 export default function Couple({ data }: CoupleProps) {
   return (
-    <section className="py-24 px-6 bg-background">
+    <section className="py-24 px-6 bg-transparent">
       <div className="container mx-auto max-w-5xl">
         <motion.div 
             initial={{ opacity: 0, y: 30 }}

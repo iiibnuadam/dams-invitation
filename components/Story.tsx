@@ -107,7 +107,7 @@ export default function Story({ data }: StoryProps) {
   const activeStories = data.weddingStory?.filter((item) => item.enabled !== false) || [];
 
   return (
-    <section className="py-24 px-6 bg-background relative overflow-hidden">
+    <section className="py-24 px-6 bg-transparent relative overflow-hidden">
       {/* Decorative background flowers */}
       <div className="absolute top-10 left-10 w-48 h-48 opacity-[0.03] pointer-events-none select-none">
         <img src="/assets/floral-corner.png" alt="" className="w-full h-full object-contain" />

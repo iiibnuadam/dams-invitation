@@ -25,7 +25,7 @@ interface HeroProps {
 
 export default function Hero({ data, isOpened = false }: HeroProps) {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-12 overflow-hidden bg-background">
+    <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-12 overflow-hidden bg-transparent">
       {/* Background Decor */}
       <div className="absolute top-0 inset-x-0 h-64 bg-gradient-to-b from-white to-transparent opacity-50 pointer-events-none" />
 
