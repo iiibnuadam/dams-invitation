@@ -201,11 +201,20 @@ export default function Gift({ data }: GiftProps) {
                        <h3 className="font-heading text-xl mt-0.5">Alamat Pengiriman</h3>
                      </div>
 
-                     <div className="my-2">
-                       <p style={{ color: customText, opacity: 0.8 }} className="text-xs font-serif leading-relaxed italic line-clamp-4">
-                         {method.address}
-                       </p>
-                     </div>
+                      <div className="my-2 space-y-2">
+                        <p style={{ color: customText, opacity: 0.8 }} className="text-xs font-serif leading-relaxed italic line-clamp-3">
+                          {method.address}
+                        </p>
+                        <div 
+                          style={{ borderColor: `${customText}15`, backgroundColor: `${customText}05` }} 
+                          className="flex items-start gap-1.5 p-2 rounded-lg border text-left"
+                        >
+                          <Icon icon="ph:warning-circle-light" style={{ color: customText }} className="text-xs mt-0.5 flex-shrink-0 opacity-80" />
+                          <p style={{ color: customText }} className="text-[9px] font-sans tracking-wide leading-normal opacity-70">
+                            Mohon konfirmasi setelah pengiriman
+                          </p>
+                        </div>
+                      </div>
 
                      <div style={{ borderColor: `${customText}10` }} className="flex justify-between items-end pt-3 border-t">
                        <div>
@@ -388,11 +397,20 @@ export default function Gift({ data }: GiftProps) {
                        <h3 className="font-heading text-2xl mt-1">Alamat Pengiriman</h3>
                      </div>
 
-                     <div className="mb-6">
-                       <p style={{ color: customText, opacity: 0.8 }} className="text-sm font-serif leading-relaxed italic">
-                         {method.address}
-                       </p>
-                     </div>
+                      <div className="mb-6 space-y-3">
+                        <p style={{ color: customText, opacity: 0.8 }} className="text-sm font-serif leading-relaxed italic">
+                          {method.address}
+                        </p>
+                        <div 
+                          style={{ borderColor: `${customText}20`, backgroundColor: `${customText}06` }} 
+                          className="flex items-start gap-2 p-2.5 rounded-lg border text-left"
+                        >
+                          <Icon icon="ph:warning-circle-light" style={{ color: customText }} className="text-base mt-0.5 flex-shrink-0 opacity-80" />
+                          <p style={{ color: customText }} className="text-[10px] md:text-xs font-sans tracking-wide leading-normal opacity-75">
+                            Mohon konfirmasi ke mempelai setelah pengiriman kado.
+                          </p>
+                        </div>
+                      </div>
 
                      <div style={{ borderColor: `${customText}10` }} className="flex justify-between items-end mt-auto pt-4 border-t">
                        <div>

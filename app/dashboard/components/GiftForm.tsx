@@ -220,6 +220,10 @@ export default function GiftForm() {
                             { name: "Champagne Gold", bg: "#FAF6EE", text: "#C5A059" },
                             { name: "Emerald Forest", bg: "#1E352F", text: "#EBE3D5" },
                             { name: "Midnight Navy", bg: "#141E30", text: "#E0E0E0" },
+                            { name: "Coklat Susu", bg: "#B58A63", text: "#FFFDF9" },
+                            { name: "Coklat Tua", bg: "#4A2E1B", text: "#F5EBE6" },
+                            { name: "Kuning Mandiri", bg: "#FFC72C", text: "#003A70" },
+                            { name: "Oren BNI", bg: "#E05326", text: "#FFFFFF" },
                           ].map((preset) => (
                             <button
                               key={preset.name}
