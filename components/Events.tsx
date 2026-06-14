@@ -27,7 +27,7 @@ interface EventsProps {
 export default function Events({ data }: EventsProps) {
   return (
     <section className="py-24 px-6 bg-[url('/patterns/arch.png')] bg-cover bg-fixed relative">
-        <div className="absolute inset-0 bg-background/90" />
+        <div className="absolute inset-0 bg-transparent" />
       <div className="container mx-auto max-w-4xl relative z-10">
         <motion.div 
             initial={{ opacity: 0, y: 30 }}
