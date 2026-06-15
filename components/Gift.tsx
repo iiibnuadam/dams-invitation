@@ -19,6 +19,7 @@ interface GiftProps {
       bgColor?: string;
       textColor?: string;
     }[];
+    giftIndicatorDirection?: "horizontal" | "vertical";
   };
 }
 
@@ -35,6 +36,162 @@ export default function Gift({ data }: GiftProps) {
   const activeMethods = data.paymentMethods.filter((p) => p.enabled !== false);
 
   if (activeMethods.length === 0) return null;
+
+  const direction = data.giftIndicatorDirection || "vertical";
+
+  const renderCard = (
+    method: typeof data.paymentMethods[number],
+    index: number,
+    isCopied: boolean,
+    customBg: string,
+    customText: string
+  ) => {
+    if (method.type === "bank") {
+      return (
+        /* Bank Card */
+        <div 
+          style={{ backgroundColor: customBg, color: customText, borderColor: `${customText}15` }}
+          className="p-6 rounded-2xl border shadow-xl relative overflow-hidden flex flex-col justify-between h-full w-full select-none"
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.06),transparent_60%)] pointer-events-none" />
+          
+          <div className="flex justify-between items-start">
+            <div>
+              <p style={{ color: customText, opacity: 0.6 }} className="text-[10px] font-semibold tracking-widest uppercase">Bank Transfer</p>
+              <h3 className="font-heading text-xl mt-0.5 tracking-wide">{method.bank}</h3>
+            </div>
+            <Icon icon="ph:bank-fill" style={{ color: customText, opacity: 0.8 }} className="text-2xl" />
+          </div>
+
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <Icon icon="ph:cpu-fill" style={{ color: customText, opacity: 0.7 }} className="text-2xl" />
+              <Icon icon="ph:broadcast" style={{ color: customText, opacity: 0.4 }} className="text-lg rotate-90" />
+            </div>
+            <p className="text-xl font-mono tracking-wider font-semibold">
+               {method.number?.replace(/(\d{4})(?=\d)/g, "$1  ")}
+            </p>
+          </div>
+
+          <div style={{ borderColor: `${customText}10` }} className="flex justify-between items-end pt-3 border-t">
+            <div>
+              <p style={{ color: customText, opacity: 0.4 }} className="text-[10px] uppercase tracking-widest">Card Holder</p>
+              <p className="text-xs font-sans tracking-wide uppercase font-semibold">{method.holder}</p>
+            </div>
+            
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCopy(method.number || "", index);
+              }}
+              style={isCopied ? {} : { borderColor: `${customText}35`, color: customText, backgroundColor: `${customText}08` }}
+              className={cn(
+                "flex items-center gap-1 px-3 py-1.5 rounded-full text-[10px] font-semibold border transition-all cursor-pointer",
+                isCopied && "bg-emerald-600 border-emerald-600 text-white"
+              )}
+            >
+              <Icon icon={isCopied ? "ph:check-bold" : "ph:copy-bold"} />
+              <span>{isCopied ? "Copied!" : "Salin"}</span>
+            </button>
+          </div>
+        </div>
+      );
+    } else if (method.type === "qris") {
+      return (
+        /* QRIS Card */
+        <div 
+          style={{ backgroundColor: customBg, color: customText, borderColor: `${customText}15` }}
+          className="p-6 rounded-2xl border shadow-xl relative overflow-hidden flex flex-col items-center justify-between text-center h-full w-full select-none"
+        >
+          <div className="absolute top-0 right-0 p-4 opacity-5">
+             <Icon icon="ph:qr-code-light" style={{ color: customText }} className="text-5xl" />
+          </div>
+
+          <div className="w-full text-center">
+            <p style={{ color: customText, opacity: 0.6 }} className="text-[10px] font-semibold tracking-widest uppercase">Scan QR Code</p>
+            <h3 className="font-heading text-xl mt-0.5">{method.bank || "QRIS"}</h3>
+          </div>
+
+          <div className="my-2 relative scale-90">
+            <div style={{ borderColor: customText }} className="absolute -top-1.5 -left-1.5 w-3 h-3 border-t-2 border-l-2 opacity-60" />
+            <div style={{ borderColor: customText }} className="absolute -top-1.5 -right-1.5 w-3 h-3 border-t-2 border-r-2 opacity-60" />
+            <div style={{ borderColor: customText }} className="absolute -bottom-1.5 -left-1.5 w-3 h-3 border-b-2 border-l-2 opacity-60" />
+            <div style={{ borderColor: customText }} className="absolute -bottom-1.5 -right-1.5 w-3 h-3 border-b-2 border-r-2 opacity-60" />
+            
+            {method.image ? (
+              <div className="w-32 h-32 bg-white p-1.5 rounded-lg shadow-sm overflow-hidden flex items-center justify-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={method.image} alt="QRIS" className="w-full h-full object-contain" />
+              </div>
+            ) : (
+              <div className="w-32 h-32 bg-muted flex items-center justify-center text-muted-foreground text-[10px] text-center p-3 rounded-lg">
+                QR Code Not Available
+              </div>
+            )}
+          </div>
+
+          <div style={{ borderColor: `${customText}10` }} className="w-full pt-3 border-t">
+            <p style={{ color: customText, opacity: 0.4 }} className="text-[10px] uppercase tracking-widest">Account Name</p>
+            <p className="text-xs font-semibold uppercase tracking-wide">{method.holder}</p>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        /* Shipping Address Card */
+        <div 
+          style={{ backgroundColor: customBg, color: customText, borderColor: `${customText}15` }}
+          className="p-6 rounded-2xl border shadow-xl relative overflow-hidden flex flex-col justify-between h-full w-full select-none"
+        >
+          <div className="absolute top-0 right-0 p-4 opacity-5">
+             <Icon icon="ph:map-pin-line" style={{ color: customText }} className="text-5xl" />
+          </div>
+
+          <div>
+            <p style={{ color: customText, opacity: 0.6 }} className="text-[10px] font-semibold tracking-widest uppercase">Kirim Kado / Hadiah</p>
+            <h3 className="font-heading text-xl mt-0.5">Alamat Pengiriman</h3>
+          </div>
+
+           <div className="my-2 space-y-2">
+             <p style={{ color: customText, opacity: 0.8 }} className="text-xs font-serif leading-relaxed italic line-clamp-3">
+               {method.address}
+             </p>
+             <div 
+               style={{ borderColor: `${customText}15`, backgroundColor: `${customText}05` }} 
+               className="flex items-start gap-1.5 p-2 rounded-lg border text-left"
+             >
+               <Icon icon="ph:warning-circle-light" style={{ color: customText }} className="text-xs mt-0.5 flex-shrink-0 opacity-80" />
+               <p style={{ color: customText }} className="text-[9px] font-sans tracking-wide leading-normal opacity-70">
+                 Mohon konfirmasi setelah pengiriman
+               </p>
+             </div>
+           </div>
+
+          <div style={{ borderColor: `${customText}10` }} className="flex justify-between items-end pt-3 border-t">
+            <div>
+              <p style={{ color: customText, opacity: 0.4 }} className="text-[10px] uppercase tracking-widest">Penerima</p>
+              <p className="text-xs font-semibold uppercase tracking-wide">{method.name}</p>
+            </div>
+
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCopy(method.address || "", index);
+              }}
+              style={isCopied ? {} : { borderColor: `${customText}35`, color: customText, backgroundColor: `${customText}08` }}
+              className={cn(
+                "flex items-center gap-1 px-3 py-1.5 rounded-full text-[10px] font-semibold border transition-all cursor-pointer",
+                isCopied && "bg-emerald-600 border-emerald-600 text-white"
+              )}
+            >
+              <Icon icon={isCopied ? "ph:check-bold" : "ph:copy-bold"} />
+              <span>{isCopied ? "Copied!" : "Salin"}</span>
+            </button>
+          </div>
+        </div>
+      );
+    }
+  };
 
   return (
     <section className="py-20 md:py-32 px-6 bg-transparent relative overflow-hidden">
@@ -62,219 +219,153 @@ export default function Gift({ data }: GiftProps) {
           <p className="text-muted-foreground font-serif italic max-w-lg mx-auto leading-relaxed text-sm md:text-base">
              Doa restu Anda merupakan karunia yang sangat berarti bagi kami. 
              Namun jika memberi adalah ungkapan tanda kasih Anda, kami ucapkan terima kasih.
-          </p>
+           </p>
         </motion.div>
 
         {/* MOBILE LAYOUT: Interactive Stacked Card Deck */}
-        <div className="block md:hidden relative w-full max-w-[325px] mx-auto h-[400px]">
-          {activeMethods.map((method, index) => {
-             const isCopied = copiedIndex === index;
-             
-             // Dynamic Colors
-             const customBg = method.bgColor || (method.type === "bank" ? "#1A1A1A" : "#FFFFFF");
-             const customText = method.textColor || (method.type === "bank" ? "#FFFFFF" : "#1A1A1A");
-             
-             // Calculate visual ordering relative to activeIndex
-             const diff = (index - activeIndex + activeMethods.length) % activeMethods.length;
-             
-             const yOffset = diff * 15;
-             const scaleOffset = 1 - diff * 0.05;
-             const rotateOffset = diff === 0 ? 0 : diff === 1 ? -3 : 3;
-             const zIndexVal = 30 - diff;
-             const opacityVal = diff > 2 ? 0 : 1;
+        {direction === "vertical" ? (
+          <div className="flex md:hidden items-center justify-center gap-4 max-w-[360px] mx-auto h-[380px] mb-10">
+            {/* Card Deck Container */}
+            <div className="relative flex-1 max-w-[280px] h-[340px]">
+              {activeMethods.map((method, index) => {
+                 const isCopied = copiedIndex === index;
+                 const customBg = method.bgColor || (method.type === "bank" ? "#1A1A1A" : "#FFFFFF");
+                 const customText = method.textColor || (method.type === "bank" ? "#FFFFFF" : "#1A1A1A");
+                 const diff = (index - activeIndex + activeMethods.length) % activeMethods.length;
+                 
+                 const yOffset = diff * 15;
+                 const scaleOffset = 1 - diff * 0.05;
+                 const rotateOffset = diff === 0 ? 0 : diff === 1 ? -3 : 3;
+                 const zIndexVal = 30 - diff;
+                 const opacityVal = diff > 2 ? 0 : 1;
 
-             return (
-               <motion.div
-                 key={index}
-                 animate={{
-                   y: yOffset,
-                   scale: scaleOffset,
-                   rotate: rotateOffset,
-                   zIndex: zIndexVal,
-                   opacity: opacityVal,
-                 }}
-                 transition={{ type: "spring", stiffness: 260, damping: 24 }}
-                 onClick={() => setActiveIndex(index)}
-                 className={cn(
-                   "absolute inset-x-0 top-0 h-[340px] cursor-pointer origin-bottom",
-                   diff > 0 && "pointer-events-auto"
-                 )}
-               >
-                 {method.type === "bank" ? (
-                   /* Bank Card */
-                   <div 
-                     style={{ backgroundColor: customBg, color: customText, borderColor: `${customText}15` }}
-                     className="p-6 rounded-2xl border shadow-xl relative overflow-hidden flex flex-col justify-between h-full w-full select-none"
+                 return (
+                   <motion.div
+                     key={index}
+                     animate={{
+                       y: yOffset,
+                       scale: scaleOffset,
+                       rotate: rotateOffset,
+                       zIndex: zIndexVal,
+                       opacity: opacityVal,
+                     }}
+                     transition={{ type: "spring", stiffness: 260, damping: 24 }}
+                     onClick={() => setActiveIndex(index)}
+                     className={cn(
+                       "absolute inset-x-0 top-0 h-[340px] cursor-pointer origin-bottom",
+                       diff > 0 && "pointer-events-auto"
+                     )}
                    >
-                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.06),transparent_60%)] pointer-events-none" />
-                     
-                     <div className="flex justify-between items-start">
-                       <div>
-                         <p style={{ color: customText, opacity: 0.6 }} className="text-[10px] font-semibold tracking-widest uppercase">Bank Transfer</p>
-                         <h3 className="font-heading text-xl mt-0.5 tracking-wide">{method.bank}</h3>
-                       </div>
-                       <Icon icon="ph:bank-fill" style={{ color: customText, opacity: 0.8 }} className="text-2xl" />
-                     </div>
+                     {renderCard(method, index, isCopied, customBg, customText)}
+                   </motion.div>
+                 );
+              })}
+            </div>
 
-                     <div>
-                       <div className="flex items-center gap-2 mb-3">
-                         <Icon icon="ph:cpu-fill" style={{ color: customText, opacity: 0.7 }} className="text-2xl" />
-                         <Icon icon="ph:broadcast" style={{ color: customText, opacity: 0.4 }} className="text-lg rotate-90" />
-                       </div>
-                       <p className="text-xl font-mono tracking-wider font-semibold">
-                          {method.number?.replace(/(\d{4})(?=\d)/g, "$1  ")}
-                       </p>
-                     </div>
-
-                     <div style={{ borderColor: `${customText}10` }} className="flex justify-between items-end pt-3 border-t">
-                       <div>
-                         <p style={{ color: customText, opacity: 0.4 }} className="text-[10px] uppercase tracking-widest">Card Holder</p>
-                         <p className="text-xs font-sans tracking-wide uppercase font-semibold">{method.holder}</p>
-                       </div>
-                       
-                       <button
-                         onClick={(e) => {
-                           e.stopPropagation();
-                           handleCopy(method.number || "", index);
-                         }}
-                         style={isCopied ? {} : { borderColor: `${customText}35`, color: customText, backgroundColor: `${customText}08` }}
-                         className={cn(
-                           "flex items-center gap-1 px-3 py-1.5 rounded-full text-[10px] font-semibold border transition-all cursor-pointer",
-                           isCopied && "bg-emerald-600 border-emerald-600 text-white"
-                         )}
-                       >
-                         <Icon icon={isCopied ? "ph:check-bold" : "ph:copy-bold"} />
-                         <span>{isCopied ? "Copied!" : "Salin"}</span>
-                       </button>
-                     </div>
-                   </div>
-                 ) : method.type === "qris" ? (
-                   /* QRIS Card */
-                   <div 
-                     style={{ backgroundColor: customBg, color: customText, borderColor: `${customText}15` }}
-                     className="p-6 rounded-2xl border shadow-xl relative overflow-hidden flex flex-col items-center justify-between text-center h-full w-full select-none"
-                   >
-                     <div className="absolute top-0 right-0 p-4 opacity-5">
-                        <Icon icon="ph:qr-code-light" style={{ color: customText }} className="text-5xl" />
-                     </div>
-
-                     <div className="w-full text-center">
-                       <p style={{ color: customText, opacity: 0.6 }} className="text-[10px] font-semibold tracking-widest uppercase">Scan QR Code</p>
-                       <h3 className="font-heading text-xl mt-0.5">{method.bank || "QRIS"}</h3>
-                     </div>
-
-                     <div className="my-2 relative scale-90">
-                       <div style={{ borderColor: customText }} className="absolute -top-1.5 -left-1.5 w-3 h-3 border-t-2 border-l-2 opacity-60" />
-                       <div style={{ borderColor: customText }} className="absolute -top-1.5 -right-1.5 w-3 h-3 border-t-2 border-r-2 opacity-60" />
-                       <div style={{ borderColor: customText }} className="absolute -bottom-1.5 -left-1.5 w-3 h-3 border-b-2 border-l-2 opacity-60" />
-                       <div style={{ borderColor: customText }} className="absolute -bottom-1.5 -right-1.5 w-3 h-3 border-b-2 border-r-2 opacity-60" />
-                       
-                       {method.image ? (
-                         <div className="w-32 h-32 bg-white p-1.5 rounded-lg shadow-sm overflow-hidden flex items-center justify-center">
-                           {/* eslint-disable-next-line @next/next/no-img-element */}
-                           <img src={method.image} alt="QRIS" className="w-full h-full object-contain" />
-                         </div>
-                       ) : (
-                         <div className="w-32 h-32 bg-muted flex items-center justify-center text-muted-foreground text-[10px] text-center p-3 rounded-lg">
-                           QR Code Not Available
-                         </div>
-                       )}
-                     </div>
-
-                     <div style={{ borderColor: `${customText}10` }} className="w-full pt-3 border-t">
-                       <p style={{ color: customText, opacity: 0.4 }} className="text-[10px] uppercase tracking-widest">Account Name</p>
-                       <p className="text-xs font-semibold uppercase tracking-wide">{method.holder}</p>
-                     </div>
-                   </div>
-                 ) : (
-                   /* Shipping Address Card */
-                   <div 
-                     style={{ backgroundColor: customBg, color: customText, borderColor: `${customText}15` }}
-                     className="p-6 rounded-2xl border shadow-xl relative overflow-hidden flex flex-col justify-between h-full w-full select-none"
-                   >
-                     <div className="absolute top-0 right-0 p-4 opacity-5">
-                        <Icon icon="ph:map-pin-line" style={{ color: customText }} className="text-5xl" />
-                     </div>
-
-                     <div>
-                       <p style={{ color: customText, opacity: 0.6 }} className="text-[10px] font-semibold tracking-widest uppercase">Kirim Kado / Hadiah</p>
-                       <h3 className="font-heading text-xl mt-0.5">Alamat Pengiriman</h3>
-                     </div>
-
-                      <div className="my-2 space-y-2">
-                        <p style={{ color: customText, opacity: 0.8 }} className="text-xs font-serif leading-relaxed italic line-clamp-3">
-                          {method.address}
-                        </p>
-                        <div 
-                          style={{ borderColor: `${customText}15`, backgroundColor: `${customText}05` }} 
-                          className="flex items-start gap-1.5 p-2 rounded-lg border text-left"
-                        >
-                          <Icon icon="ph:warning-circle-light" style={{ color: customText }} className="text-xs mt-0.5 flex-shrink-0 opacity-80" />
-                          <p style={{ color: customText }} className="text-[9px] font-sans tracking-wide leading-normal opacity-70">
-                            Mohon konfirmasi setelah pengiriman
-                          </p>
-                        </div>
-                      </div>
-
-                     <div style={{ borderColor: `${customText}10` }} className="flex justify-between items-end pt-3 border-t">
-                       <div>
-                         <p style={{ color: customText, opacity: 0.4 }} className="text-[10px] uppercase tracking-widest">Penerima</p>
-                         <p className="text-xs font-semibold uppercase tracking-wide">{method.name}</p>
-                       </div>
-
-                       <button
-                         onClick={(e) => {
-                           e.stopPropagation();
-                           handleCopy(method.address || "", index);
-                         }}
-                         style={isCopied ? {} : { borderColor: `${customText}35`, color: customText, backgroundColor: `${customText}08` }}
-                         className={cn(
-                           "flex items-center gap-1 px-3 py-1.5 rounded-full text-[10px] font-semibold border transition-all cursor-pointer",
-                           isCopied && "bg-emerald-600 border-emerald-600 text-white"
-                         )}
-                       >
-                         <Icon icon={isCopied ? "ph:check-bold" : "ph:copy-bold"} />
-                         <span>{isCopied ? "Copied!" : "Salin"}</span>
-                       </button>
-                     </div>
-                   </div>
-                 )}
-               </motion.div>
-             );
-          })}
-        </div>
-
-        {/* Mobile Pagination Indicator Dots & Carets */}
-        <div className="flex md:hidden justify-center items-center gap-5 mt-2 mb-10">
-          <button
-            onClick={() => setActiveIndex((prev) => (prev - 1 + activeMethods.length) % activeMethods.length)}
-            className="w-8 h-8 rounded-full border border-accent/20 flex items-center justify-center text-accent hover:bg-accent/5 transition-colors cursor-pointer"
-            aria-label="Previous card"
-          >
-            <Icon icon="ph:caret-left-bold" className="text-sm" />
-          </button>
-          
-          <div className="flex items-center gap-1.5">
-            {activeMethods.map((_, index) => (
+            {/* Vertical Pagination Controls */}
+            <div className="flex flex-col items-center gap-3 flex-shrink-0">
               <button
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                className={cn(
-                  "w-1.5 h-1.5 rounded-full transition-all duration-300",
-                  activeIndex === index ? "bg-accent w-4" : "bg-accent/30"
-                )}
-              />
-            ))}
-          </div>
+                onClick={() => setActiveIndex((prev) => (prev - 1 + activeMethods.length) % activeMethods.length)}
+                className="w-8 h-8 rounded-full border border-accent/20 flex items-center justify-center text-accent hover:bg-accent/5 transition-colors cursor-pointer"
+                aria-label="Previous card"
+              >
+                <Icon icon="ph:caret-up-bold" className="text-sm" />
+              </button>
+              
+              <div className="flex flex-col items-center gap-1.5">
+                {activeMethods.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveIndex(index)}
+                    className={cn(
+                      "w-1.5 h-1.5 rounded-full transition-all duration-300",
+                      activeIndex === index ? "bg-accent h-4" : "bg-accent/30"
+                    )}
+                  />
+                ))}
+              </div>
 
-          <button
-            onClick={() => setActiveIndex((prev) => (prev + 1) % activeMethods.length)}
-            className="w-8 h-8 rounded-full border border-accent/20 flex items-center justify-center text-accent hover:bg-accent/5 transition-colors cursor-pointer"
-            aria-label="Next card"
-          >
-            <Icon icon="ph:caret-right-bold" className="text-sm" />
-          </button>
-        </div>
+              <button
+                onClick={() => setActiveIndex((prev) => (prev + 1) % activeMethods.length)}
+                className="w-8 h-8 rounded-full border border-accent/20 flex items-center justify-center text-accent hover:bg-accent/5 transition-colors cursor-pointer"
+                aria-label="Next card"
+              >
+                <Icon icon="ph:caret-down-bold" className="text-sm" />
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="block md:hidden relative w-full max-w-[325px] mx-auto h-[400px] mb-10">
+            {/* Card Deck Container */}
+            <div className="relative w-full h-[340px]">
+              {activeMethods.map((method, index) => {
+                 const isCopied = copiedIndex === index;
+                 const customBg = method.bgColor || (method.type === "bank" ? "#1A1A1A" : "#FFFFFF");
+                 const customText = method.textColor || (method.type === "bank" ? "#FFFFFF" : "#1A1A1A");
+                 const diff = (index - activeIndex + activeMethods.length) % activeMethods.length;
+                 
+                 const yOffset = diff * 15;
+                 const scaleOffset = 1 - diff * 0.05;
+                 const rotateOffset = diff === 0 ? 0 : diff === 1 ? -3 : 3;
+                 const zIndexVal = 30 - diff;
+                 const opacityVal = diff > 2 ? 0 : 1;
+
+                 return (
+                   <motion.div
+                     key={index}
+                     animate={{
+                       y: yOffset,
+                       scale: scaleOffset,
+                       rotate: rotateOffset,
+                       zIndex: zIndexVal,
+                       opacity: opacityVal,
+                     }}
+                     transition={{ type: "spring", stiffness: 260, damping: 24 }}
+                     onClick={() => setActiveIndex(index)}
+                     className={cn(
+                       "absolute inset-x-0 top-0 h-[340px] cursor-pointer origin-bottom",
+                       diff > 0 && "pointer-events-auto"
+                     )}
+                   >
+                     {renderCard(method, index, isCopied, customBg, customText)}
+                   </motion.div>
+                 );
+              })}
+            </div>
+
+            {/* Horizontal Pagination Controls */}
+            <div className="flex justify-center items-center gap-5 mt-4">
+              <button
+                onClick={() => setActiveIndex((prev) => (prev - 1 + activeMethods.length) % activeMethods.length)}
+                className="w-8 h-8 rounded-full border border-accent/20 flex items-center justify-center text-accent hover:bg-accent/5 transition-colors cursor-pointer"
+                aria-label="Previous card"
+              >
+                <Icon icon="ph:caret-left-bold" className="text-sm" />
+              </button>
+              
+              <div className="flex items-center gap-1.5">
+                {activeMethods.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveIndex(index)}
+                    className={cn(
+                      "w-1.5 h-1.5 rounded-full transition-all duration-300",
+                      activeIndex === index ? "bg-accent w-4" : "bg-accent/30"
+                    )}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={() => setActiveIndex((prev) => (prev + 1) % activeMethods.length)}
+                className="w-8 h-8 rounded-full border border-accent/20 flex items-center justify-center text-accent hover:bg-accent/5 transition-colors cursor-pointer"
+                aria-label="Next card"
+              >
+                <Icon icon="ph:caret-right-bold" className="text-sm" />
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* DESKTOP LAYOUT: Beautiful Premium Grid */}
         <div className={cn(

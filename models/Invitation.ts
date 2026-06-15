@@ -82,6 +82,7 @@ export interface IInvitation extends Document {
   showGalleryPopup?: boolean;
   musicUrl?: string;
   musicTracks?: { name: string; url: string }[];
+  giftIndicatorDirection?: "horizontal" | "vertical";
 }
 
 const InvitationSchema: Schema = new Schema(
@@ -187,6 +188,7 @@ const InvitationSchema: Schema = new Schema(
     showGalleryPopup: { type: Boolean, default: true },
     musicUrl: { type: String, default: "" },
     musicTracks: { type: [{ name: String, url: String }], default: [] },
+    giftIndicatorDirection: { type: String, enum: ["horizontal", "vertical"], default: "vertical" },
   },
   { timestamps: true }
 );

@@ -77,6 +77,23 @@ export default function GiftForm() {
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
+        {/* Global Gift Settings */}
+        <div className="p-4 bg-muted/40 rounded-lg border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <Label className="font-semibold text-sm">Mobile Navigation Direction</Label>
+            <p className="text-xs text-muted-foreground">Choose direction for mobile deck pagination controls & dots (horizontal below, or vertical to the side).</p>
+          </div>
+          <div className="w-[180px] flex-shrink-0">
+            <select
+              {...register("giftIndicatorDirection")}
+              className="flex h-9 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <option value="vertical">Vertical (Side)</option>
+              <option value="horizontal">Horizontal (Below)</option>
+            </select>
+          </div>
+        </div>
+
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
@@ -243,11 +260,23 @@ export default function GiftForm() {
                           ))}
                         </div>
 
-                        {/* Hex Inputs */}
+                        {/* Hex & Color Picker Inputs */}
                         <div className="grid grid-cols-2 gap-4 pt-1">
                           <div className="space-y-1">
-                            <Label className="text-[10px] text-muted-foreground">Background Color (Hex)</Label>
-                            <div className="flex gap-2">
+                            <Label className="text-[10px] text-muted-foreground">Background Color</Label>
+                            <div className="flex items-center gap-2">
+                              <input
+                                type="color"
+                                value={
+                                  (watch(`paymentMethods.${index}.bgColor`) && /^#[0-9A-F]{6}$/i.test(watch(`paymentMethods.${index}.bgColor`))) 
+                                    ? watch(`paymentMethods.${index}.bgColor`) 
+                                    : "#1A1A1A"
+                                }
+                                onChange={(e) => {
+                                  setValue(`paymentMethods.${index}.bgColor`, e.target.value, { shouldDirty: true });
+                                }}
+                                className="w-8 h-8 rounded-md border border-input cursor-pointer bg-transparent p-0 overflow-hidden [&::-webkit-color-swatch-wrapper]:p-0 [&::-webkit-color-swatch]:border-none [&::-webkit-color-swatch]:rounded-md flex-shrink-0"
+                              />
                               <Input
                                 placeholder="#1A1A1A"
                                 className="h-8 text-xs font-mono"
@@ -256,8 +285,20 @@ export default function GiftForm() {
                             </div>
                           </div>
                           <div className="space-y-1">
-                            <Label className="text-[10px] text-muted-foreground">Text Color (Hex)</Label>
-                            <div className="flex gap-2">
+                            <Label className="text-[10px] text-muted-foreground">Text Color</Label>
+                            <div className="flex items-center gap-2">
+                              <input
+                                type="color"
+                                value={
+                                  (watch(`paymentMethods.${index}.textColor`) && /^#[0-9A-F]{6}$/i.test(watch(`paymentMethods.${index}.textColor`))) 
+                                    ? watch(`paymentMethods.${index}.textColor`) 
+                                    : "#FFFFFF"
+                                }
+                                onChange={(e) => {
+                                  setValue(`paymentMethods.${index}.textColor`, e.target.value, { shouldDirty: true });
+                                }}
+                                className="w-8 h-8 rounded-md border border-input cursor-pointer bg-transparent p-0 overflow-hidden [&::-webkit-color-swatch-wrapper]:p-0 [&::-webkit-color-swatch]:border-none [&::-webkit-color-swatch]:rounded-md flex-shrink-0"
+                              />
                               <Input
                                 placeholder="#FFFFFF"
                                 className="h-8 text-xs font-mono"

@@ -111,7 +111,8 @@ const invitationSchema = z.object({
   musicTracks: z.array(z.object({
     name: z.string(),
     url: z.string()
-  })).optional()
+  })).optional(),
+  giftIndicatorDirection: z.enum(["horizontal", "vertical"]).default("vertical").optional()
 });
 
 type InvitationFormValues = z.infer<typeof invitationSchema>;

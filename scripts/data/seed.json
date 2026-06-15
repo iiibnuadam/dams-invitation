@@ -105,8 +105,8 @@
       "holder": "Sasti Virgine Javanti",
       "type": "bank",
       "enabled": true,
-      "bgColor": "#E05326",
-      "textColor": "#FFFFFF"
+      "bgColor": "#B58A63",
+      "textColor": "#FFFDF9"
     },
     {
       "bank": "Mandiri",
@@ -114,8 +114,8 @@
       "holder": "Ibnu Adam",
       "type": "bank",
       "enabled": true,
-      "bgColor": "#FFC72C",
-      "textColor": "#003A70"
+      "bgColor": "#4A2E1B",
+      "textColor": "#F5EBE6"
     },
     {
       "name": "Sasti Virgine Javanti",
