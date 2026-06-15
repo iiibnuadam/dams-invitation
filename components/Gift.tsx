@@ -334,7 +334,7 @@ export default function Gift({ data }: GiftProps) {
             </div>
 
             {/* Horizontal Pagination Controls */}
-            <div className="flex justify-center items-center gap-5 mt-4">
+            <div className="flex justify-center items-center gap-5 mt-12">
               <button
                 onClick={() => setActiveIndex((prev) => (prev - 1 + activeMethods.length) % activeMethods.length)}
                 className="w-8 h-8 rounded-full border border-accent/20 flex items-center justify-center text-accent hover:bg-accent/5 transition-colors cursor-pointer"
