@@ -108,7 +108,7 @@ function EventCard({ event, index }: { event: any, index: number }) {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay, duration: 0.6 }}
             viewport={{ once: true }}
-            className="w-full max-w-xl bg-white/60 dark:bg-black/40 backdrop-blur border border-border/80 p-8 md:p-12 rounded-t-full rounded-b-lg text-center shadow-lg hover:shadow-xl transition-all relative overflow-hidden group"
+            className="w-full max-w-xl bg-white/92 dark:bg-black/85 backdrop-blur-md border border-accent/30 p-8 md:p-12 rounded-t-full rounded-b-lg text-center shadow-xl hover:shadow-[0_20px_45px_rgba(197,160,89,0.15)] transition-all duration-500 relative overflow-hidden group"
         >
             {/* Elegant Double Inner Border Frame */}
             <div className="absolute inset-2 border border-accent/25 rounded-t-full rounded-b-md pointer-events-none z-10" />
@@ -158,9 +158,9 @@ function EventCard({ event, index }: { event: any, index: number }) {
                         <div className="py-2 max-w-xs mx-auto space-y-3">
                             {event.schedules.map((schedule: any, sIdx: number) => (
                                 <div key={sIdx} className="flex flex-col items-center justify-center border-t border-accent/15 pt-3 first:border-0 first:pt-0">
-                                    <span className="font-heading text-xl text-accent tracking-wide">{schedule.name}</span>
-                                    <span className="inline-flex items-center gap-1.5 text-muted-foreground font-sans text-sm tracking-wide mt-1">
-                                        <Icon icon="ph:clock-light" className="text-accent text-base" />
+                                     <span className="font-heading text-2xl text-[#9E7A3E] font-medium tracking-wide">{schedule.name}</span>
+                                     <span className="inline-flex items-center gap-1.5 text-muted-foreground font-sans text-sm tracking-wide mt-1">
+                                         <Icon icon="ph:clock-light" className="text-[#9E7A3E] text-base" />
                                         {schedule.jam}
                                     </span>
                                 </div>

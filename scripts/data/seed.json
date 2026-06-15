@@ -57,7 +57,7 @@
       "schedules": [
         {
           "name": "Akad Nikah",
-          "jam": "08:00 - 10:00 WIB"
+          "jam": "08:00 WIB"
         },
         {
           "name": "Resepsi Pernikahan",
@@ -105,8 +105,8 @@
       "holder": "Sasti Virgine Javanti",
       "type": "bank",
       "enabled": true,
-      "bgColor": "#FAF6EE",
-      "textColor": "#C5A059"
+      "bgColor": "#E05326",
+      "textColor": "#FFFFFF"
     },
     {
       "bank": "Mandiri",
@@ -114,11 +114,11 @@
       "holder": "Ibnu Adam",
       "type": "bank",
       "enabled": true,
-      "bgColor": "#141E30",
-      "textColor": "#E0E0E0"
+      "bgColor": "#FFC72C",
+      "textColor": "#003A70"
     },
     {
-      "name": "Rumah Sasti Virgine Javanti",
+      "name": "Sasti Virgine Javanti",
       "address": "Jl. Ternate No.48 Rt 03/06 Kaligelang, Taman, Pemalang (52361)",
       "type": "address",
       "enabled": true,
@@ -180,6 +180,6 @@
   "isLocked": false,
   "password": "sastisayangadam",
   "showGalleryPopup": true,
-  "musicTracks": [],
-  "musicUrl": "/assets/musics/cant-help-falling-in-love.mp3"
+  "musicUrl": "/assets/musics/cant-help-falling-in-love.mp3",
+  "musicTracks": []
 }
