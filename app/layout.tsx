@@ -25,6 +25,13 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+  openGraph: {
+    images: ["/assets/couple.JPG"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/assets/couple.JPG"],
+  },
 };
 
 import LoveCursor from "@/components/LoveCursor";
